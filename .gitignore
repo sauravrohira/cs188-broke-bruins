@@ -1,2 +1,3 @@
-bb-frontend/node_modules
+.DS_Store
 bb-backend/node_modules
+bb-frontend/node_modules
