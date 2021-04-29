@@ -15,7 +15,7 @@ async function assertDatabaseConnectionOk() {
         console.log('Database connection OK!');
         
         //uncomment to migrate model changes to db
-        await sequelize.sync({})
+        await sequelize.sync({force:true})
     } catch (error) {
         console.log('Unable to connect to the database:');
         console.log(error.message);
