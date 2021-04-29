@@ -17,6 +17,7 @@ const sequelize = new Sequelize('da13n4i1qp275g', 'jgsgvynnnyhpxg', '68326a3fca1
 //Define models 
 const modelDefiners = [
     require('../models/user'),
+    require('../models/rental'),
     require('../models/offer')
 ]
 for (const modelDefiner of modelDefiners) {
@@ -24,6 +25,10 @@ for (const modelDefiner of modelDefiners) {
 }
 
 //Define Associations:
+const {user, rental, offer} = sequelize.models;
+user.hasMany(rental);
+rental.hasMany(offer);
+
 
 console.log(sequelize.models)
 
