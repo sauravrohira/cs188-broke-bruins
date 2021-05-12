@@ -1,3 +1,5 @@
+const sequelize = require('./db');
+
 exports.createListing = async (req,res) => {
     const rental = sequelize.models.rental;
     try {
@@ -26,7 +28,7 @@ exports.updateListing = async (req,res) => {
             sold: req.body.sold,
             title: req.body.title,
             description: req.body.description
-        }, { returning: true, where: { id: req.params.id } });
+        }, { returning: true, where: { id: req.body.id } });
         
         if (Rental) {
             return res.status(200).json({ Rental });
@@ -41,7 +43,7 @@ exports.updateListing = async (req,res) => {
 exports.deleteListing = async (req,res) => {
     const rental = sequelize.models.rental;
     try {
-        const deleted = await rental.destroy({ where: { id: req.params.id } });
+        const deleted = await rental.destroy({ where: { id: req.body.id } });
         
         if (deleted) {
             return res.status(200).send("Rental deleted");
@@ -61,10 +63,19 @@ exports.getUserListings = async (req,res) => {
     }
 }
 
-exports.searchListing = async (req,res) => {
+exports.getListing = async (req,res) => {
     const rental = sequelize.models.rental;
     try {
         rental.findOne({ where: { id: req.body.id } }).then(rental => res.json(rental));
+    } catch(err) {
+        return res.status(500).send(err.message);
+    }
+}
+
+exports.getAllListings = async (req,res) => {
+    const rental = sequelize.models.rental;
+    try {
+        rental.findAll().then(rental => res.json(rental));
     } catch(err) {
         return res.status(500).send(err.message);
     }
