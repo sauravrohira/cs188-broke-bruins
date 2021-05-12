@@ -36,29 +36,30 @@ import React, {
       return response;
     },
     async logout() {
-      let response = await fetch("/api/logout", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Credentials': 'include'
-        }
-      })
-      .then(response => {
-        if (response.status === 200) {
-          return true;
-        }
-        else {
-          return false;
-        }
-      })
-      .catch(err => {
-        if (err.status === 500) {
-          return false;
-        }
-        return false;
-      });
+      return true;
+      // let response = await fetch("/api/logout", {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //     'Credentials': 'include'
+      //   }
+      // })
+      // .then(response => {
+      //   if (response.status === 200) {
+      //     return true;
+      //   }
+      //   else {
+      //     return false;
+      //   }
+      // })
+      // .catch(err => {
+      //   if (err.status === 500) {
+      //     return false;
+      //   }
+      //   return false;
+      // });
   
-      return response;
+      // return response;
     },
     async refresh() {
       // let response = await fetch("/api/core", {

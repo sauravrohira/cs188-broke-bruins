@@ -7,11 +7,23 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+}
+
+.Logo-placeholder {
+  font-size: 48px;
+  color: #f6e0b5;
+  margin: 20px;
 }
 
 .Login {
   text-align: left;
+}
+
+.Login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .Login-field {
@@ -20,16 +32,62 @@
 }
 
 .Login-label {
-  color: white;
   margin-right: 12px;
 }
 
 .Login-input {
-  background-color: black;
+  /* background: white; */
 }
 
 .Login-button {
   border-color: black;
   border-style: solid;
   text-align: center;
+}
+
+.Home {
+  text-align: center;
+  background-color: #aa6f73;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.Nav-bar {
+  color: white;
+  background-color: #66545e;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+}
+
+.Rental-list {
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.Rental-card {
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-style: solid;
+  border-color: #66545e;
+  border-radius: 1rem;
+}
+
+.Rental-info {
+  padding: 20px;
+  text-align: left;
+}
+
+.Rental-image {
+  height: 120px;
+  margin: 20px;
 }

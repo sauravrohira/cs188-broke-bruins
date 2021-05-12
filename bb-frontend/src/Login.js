@@ -1,7 +1,7 @@
 import './App.css';
 import { useState } from 'react'
-// import Button from '@material-ui/core/Button';
-import Input from '@material-ui/core/Input';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 import { useAuth } from "./use-auth.js"
 
@@ -27,25 +27,36 @@ function Login(props) {
 
   return (
     <div className="App">
-    <div className="Login">
-    <form onSubmit={evt => handleLogin(evt)}>
-      <div> 
-        <div className="Login-field">
-          <label className="Login-label" htmlFor="email">
-            Email address
-          </label>
-          <Input classes="Login-input" onChange={(evt) => setUsername(evt.target.value)} name="email" type="email" />
-        </div>
-        <div className="Login-field">
-          <label className="Login-label" htmlFor="password">
-            Password
-          </label>
-          <Input onChange={(evt) => setPassword(evt.target.value)} name="password" type="password" />
-        </div>
-        <div className="Login-button">
-          <input type="submit" value="Login" />
-        </div>
+      <div className="Logo-placeholder">
+        broke bruins
       </div>
+    <div className="Login">
+    <form onSubmit={evt => handleLogin(evt)} className="Login-form">
+        <div className="Login-field">
+          <TextField 
+            id="Filled-basic"
+            label="Email Address" 
+            variant="outlined" 
+            onChange={(evt) => setUsername(evt.target.value)} 
+            value={username}
+            type="email"
+            // required 
+            />
+        </div>
+        <div className="Login-field">
+          <TextField 
+            className="Login-input" 
+            label="Password"
+            variant="outlined"
+            // required
+            onChange={(evt) => setPassword(evt.target.value)} 
+            value={password}
+            name="password" 
+            type="password" />
+        </div>
+        <Button type="submit" variant="contained" color="primary">
+          Login
+        </Button>
     </form>
     </div>
   </div>

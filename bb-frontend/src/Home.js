@@ -1,5 +1,6 @@
 import './App.css';
 import NavBar from './NavBar';
+import RentalList from './RentalList';
 // import { useState } from 'react'
 // import Button from '@material-ui/core/Button';
 // import Input from '@material-ui/core/Input';
@@ -7,10 +8,10 @@ import NavBar from './NavBar';
 function Home() {
 
   return (
-    <div className="App">
+    <div className="Home">
         <NavBar />
         {/* <FilterBar handleOrderChange={handleOrderChange} handleSortChange={handleSortChange} sort={{forwards, orderBy}} /> */}
-        {/* <ContactList sort={{forwards, orderBy}} /> */}
+        <RentalList />
     </div>
   );
 }
