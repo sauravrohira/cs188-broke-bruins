@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+// user-defined components
+import AuthenticationRouting from './authentication-routing';
+import { ProvideAuth } from './use-auth';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ProvideAuth>
+      <AuthenticationRouting />
+    </ProvideAuth>  
   </React.StrictMode>,
   document.getElementById('root')
 );
