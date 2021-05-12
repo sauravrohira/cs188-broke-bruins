@@ -54,6 +54,9 @@ exports.login = async (req,res) => {
     let user
     try {
         user = await userServices.fetchUser(email)
+        if(!user){
+            return res.status(401).json({ message: "Invalid Username or Password" })
+        }
     }
     catch(err){
         console.log(err)
