@@ -2,11 +2,15 @@ const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
     sequelize.define('offer', {
-        buyer_id: {
+        buyerId: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        seller_id: {
+        sellerId: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        listingId: {
             type: DataTypes.STRING,
             allowNull: false
         },
