@@ -32,7 +32,7 @@ function Offers() {
 
   return (
     <div>
-      {offers && offers.map(listing => (
+      {offers && offers.length && offers.map(listing => (
         <div className="Rental-card">
           <div>
             <div className="Rental-info">{listing.title}</div>

@@ -45,12 +45,13 @@ function Profile() {
             <div className="Profile-details">
                 <img src="https://www.jnis.ac.in/images/ca9ef5762f5458271e00249401f67406.jpg" className="Profile-image" alt="oops"/>
                 <div>
-                    <div>MY PROFILE</div>
                     <div>@{user.username}</div>
                 </div>
             </div>
             <div>
-                <Button onClick={handleCreateListing}>Create Listing!</Button>
+                <div className="Create-listing">
+                    <Button onClick={handleCreateListing}>Create Listing!</Button>
+                </div>
                 {createListingClicked ? 
                         <Dialog
                          open={createListingClicked}
@@ -63,8 +64,14 @@ function Profile() {
                        : <div/>}
             </div>
             <div className="Listings-and-offers">
-                <Button onClick={handleMyListingsClicked}>My Listings</Button>
-                <Button onClick={handleMyOffersClicked}>My Offers</Button>
+                {myOffersClicked ? 
+                    <span> <Button onClick={handleMyListingsClicked}>My Listings</Button> </span>
+                    : <span className="Clicked-tab"> <Button onClick={handleMyListingsClicked}>My Listings</Button> </span>
+                }
+                {myOffersClicked ? 
+                    <span className="Clicked-tab"> <Button onClick={handleMyOffersClicked}>My Offers</Button> </span>
+                    : <span> <Button onClick={handleMyOffersClicked}>My Offers</Button> </span>
+                }
                 <div className="Listings-and-offers-list">
                     {myOffersClicked ? <Offers/> : <div> <Listings/> </div>}
                 </div>

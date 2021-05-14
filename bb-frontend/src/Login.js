@@ -51,13 +51,14 @@ function Login(props) {
 
   return (
     <div className="App">
-      <div className="Logo-placeholder">
-        <img src={logo} style={{height:'130px'}} alt='broke bruins'/>
-      </div>
       {incorrectLogin ? <AlertDialog/> : <div></div>}
       {incorrectSignup ? <AlertDialog/> : <div></div>}
       {successfulSignup ? <div>Please verify your email address. Following that, you may log in. </div> : <div></div>}
-    <div className="Login-and-signup">
+      <div className="Login-and-signup">
+      <div className="Logo-placeholder">
+        <div className="Login-title">Broke</div>
+        <img src={logo} style={{height:'260px'}} alt='broke bruins'/>
+      </div>
       <div className="Login">
         <div className="Login-and-signup-prompt"> Existing User? </div>
         <form onSubmit={evt => handleLogin(evt)} className="Login-and-signup-form">

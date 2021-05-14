@@ -11,7 +11,6 @@
 
 .Logo-placeholder {
   font-size: 48px;
-  color: #f6e0b5;
   margin: 20px;
 }
 
@@ -153,7 +152,9 @@
 }
 
 .Profile-image {
+  border-radius: 50%;
   height: 148px;
+  width: 148px;
   margin: 12px;
 }
 
@@ -200,4 +201,28 @@
   flex-direction: column;
   align-items: flex-end;
   margin-right: 48px;
+}
+
+.Login-title {
+  margin-bottom: 24px;
+  font-style: italic;
+  text-shadow: -2px 0 #f6e0b5, 0 2px #f6e0b5, 2px 0 #f6e0b5, 0 -2px #f6e0b5;
+  color: rgb(16, 63, 165);
+}
+
+.Create-listing {
+  margin-left: 24px;
+  padding: 8px;
+  border-style: solid;
+  border-width: 0.1rem;
+  width: 12%;
+  background-color: #f6e0b5;
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.Clicked-tab {
+  padding: 8px;
+  border-bottom: solid;
+  border-width: 0.1rem;
 }
