@@ -22,9 +22,9 @@ function NavBar() {
         <div className="Nav-bar">
         {/* <img alt="logo" className="NetworkLogo" src={logo} /> */}
         <div className="Nav-bar">
-            <span>
+            <span className="Button">
                 <Button variant="info" onClick={handleLogout}>
-                    Sign Out
+                    Sign Out 
                 </Button>
             </span>
         </div>

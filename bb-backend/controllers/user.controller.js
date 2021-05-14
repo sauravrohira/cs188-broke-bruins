@@ -8,7 +8,7 @@ exports.signup = async (req,res) => {
 
     // use client side validation and send non-empty username/email/password to backend
     if (password.length < 8) {
-        return res.status(200).json({
+        return res.status(400).json({
             error: 'Invalid password. Must have at least 8 characters.'
         })
     }
@@ -72,5 +72,11 @@ exports.login = async (req,res) => {
     return res.status(200).json({
         message: 'Login successful',
         id: user.id,
+        username: user.username,
+        email: user.email,
+        primaryComm: user.primary_communication_method,
+        primaryDetails: user.primary_communication_details,
+        secondaryComm: user.secondary_communication_method,
+        secondaryDetails: user.secondary_communication_details,
     })
 }
