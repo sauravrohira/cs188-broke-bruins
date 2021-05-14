@@ -1,6 +1,5 @@
 import React, {
     useState,
-    useEffect,
     useContext,
     createContext
   } from "react";
@@ -9,30 +8,29 @@ import React, {
   // could be extracted to separate file
   const auth = {
     user: null,
-    async login(username, password) {
-      // send request to backend
-      // let response = await fetch("/api/login", {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     'Credentials': 'include'
-      //   },
-      //   body: JSON.stringify({username, password})
-      // })
-      // .then(response => response.json())
-      // .catch(err => {
-      //   if (err.status === 401) {
-      //     return null;
-      //   }
-      // });
+    async login(email, password) {
+      let response = await fetch("http://localhost:8000/api/user/login", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Credentials': 'include'
+        },
+        body: JSON.stringify({email, password})
+      }).then((response) => {
+        // console.log("response", response.status)
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Unsuccessful Login');
+        }
+      })
+      .catch(err => {
+        if (err.status === 401) {
+          return null;
+        }
+      });
 
-      // temp until backend connected 
-      const response = {
-        username, 
-        password
-      }
       // should be userObject
-      console.log("reponse!", response)
       return response;
     },
     async logout() {
@@ -87,14 +85,22 @@ import React, {
       };
       return response;
     },
-    async register(userObject) {
-      let response = await fetch('/api/register', {
+    async signup(userObject) {
+      console.log("!!!", userObject);
+      const obj = {
+        email: userObject.emailNew,
+        password: userObject.passwordNew, 
+        username: userObject.username, 
+        primaryComm: userObject.primaryComm, 
+        primaryDetails: userObject.primaryDetails 
+      }
+      let response = await fetch("http://localhost:8000/api/user/signup", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Credentials': 'include'
         },
-        body: JSON.stringify(userObject)
+        body: JSON.stringify(obj)
       })
       .then(response => {
         if (response.status === 200) {
@@ -156,10 +162,7 @@ import React, {
           return null;
         }
   
-        console.log("in second", response);
         setUser(response)
-        console.log("user", user);
-        console.log(user)
         return response;
       })
     };
@@ -191,14 +194,13 @@ import React, {
       });
     };
   
-    const register = (userObject) => {
-      return auth.register(userObject)
-      .then(didRegister => {
-        if (didRegister) {
-          setUser(userObject);
-        }
-  
-        return didRegister;
+    const signup = (userObject) => {
+      return auth.signup(userObject)
+      .then(didSignup => {
+        // if (didSignup) {
+        //   setUser(userObject);
+        // }
+        return didSignup;
       });
     }
   
@@ -207,7 +209,7 @@ import React, {
       login,
       logout,
       refresh,
-      register
+      signup
     };
   }
   

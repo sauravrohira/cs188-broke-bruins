@@ -24,7 +24,7 @@ function NavBar() {
         <div className="Nav-bar">
             <span>
                 <Button variant="info" onClick={handleLogout}>
-                    Sign Out
+                    Sign Out 
                 </Button>
             </span>
         </div>
