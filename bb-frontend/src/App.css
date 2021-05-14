@@ -114,17 +114,17 @@
 .Rental-info {
   padding: 20px;
   text-align: left;
-  flex-basis: 70%;
-  flex-grow: 0;
-  flex-shrink: 0;
 }
 
 .Rental-image {
   height: 120px;
+  width: 120px;
   margin: 20px;
 }
 
 .Rental-offer {
+  margin-left: auto;
+  margin-right: 24px;
 }
 
 .Profile {
@@ -172,6 +172,7 @@
 .Price-value {
   font-weight: lighter;
 }
+
 .Image-Upload-Box {
   margin: 20px;
   display: flex;
@@ -184,8 +185,7 @@
 }
 
 .Listing-form {
-  color: #f6e0b5 
-  
+  color: #f6e0b5;
 }
 
 .Search-bar {

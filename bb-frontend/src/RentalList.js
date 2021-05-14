@@ -39,7 +39,7 @@ function Rental(props) {
         <div className="Rental-card">
             <div>
                 <div className="Image">
-                    <img src="https://cdn.shopify.com/s/files/1/0228/1357/products/skiing_mask_c529e9d6-930c-4765-a5b5-1adccdd1bdec_1024x1024.jpg?v=1474786959" className="Rental-image" alt="oops"/>
+                    <img src={props.imageUrl} className="Rental-image" alt="oops"/>
                 </div>
             </div>
             <div className="Rental-info">
