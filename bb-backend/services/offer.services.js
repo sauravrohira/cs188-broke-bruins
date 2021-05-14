@@ -76,12 +76,11 @@ exports.getListingOffers = async (req,res) => {
 exports.getUsersOfferListings = async (req,res) => {
     const RentalController = require('../controllers/rental.controller');
     try {
-        const userOffers = await offer.findAll({ where: { buyerId: req.body.userId } });
+        const userOffers = await offer.findAll({ where: { buyerId: req.query.userId } });
         var listings = [];
         for (var i = 0; i < userOffers.length; i++) {
             listings.push(await userOffers[i].getRental());
         }
-        console.log(listings);
         return res.status(200).send(listings);
     } catch(err) {
         return res.status(500).send(err.message);

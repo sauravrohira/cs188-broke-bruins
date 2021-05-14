@@ -13,21 +13,19 @@ function Offers() {
       'Content-Type': 'application/json',
       'Credentials': 'include'
     },
-    body: JSON.stringify({userId})
   }
 
   useEffect(() => {
     async function getListings() {
-    fetch("http://localhost:8000/api/offer/getUsersOfferListings", options)
+    fetch(`http://localhost:8000/api/offer/getUsersOfferListings?userId=${userId}`, options)
         .then(res => res.json())
-        .then(
-        (result) => {
+        .then((result) => {
+            console.log("here is the result:",result)
             setOffers(result);
-        },
-        (error) => {
-            setOffers(error);
-        }
-        )
+        })
+        .catch(err => {
+          setOffers(err);
+        })
       }
       getListings();
   }, [])
