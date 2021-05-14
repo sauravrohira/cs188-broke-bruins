@@ -16,20 +16,21 @@ function Home() {
 
   return (
     <div>
-      {myAccount ? 
+      {!myAccount ? 
         (
           <div className="Home">
           <NavBar />
           <div className="Home-options">
-              <Button onClick={changePage}>My Account</Button>
+              <span className="Button"><Button onClick={changePage}>My Account</Button></span>
           </div>
           {/* <FilterBar handleOrderChange={handleOrderChange} handleSortChange={handleSortChange} sort={{forwards, orderBy}} /> */}
           <RentalList />
           </div>
         ) : (
           <div> 
-            <div className="Nav-bar">
-              <Button onClick={changePage}>Home</Button>
+            <NavBar/>
+            <div className="Home-options">
+              <span className="Button"><Button onClick={changePage}>Home</Button></span>
             </div>
             <Profile/>
           </div>
