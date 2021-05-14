@@ -21,6 +21,15 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             unique: true
         },
+        verified: {
+            allowNull: false,
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
+        secretCode: {
+            allowNull: false,
+            type: DataTypes.INTEGER,
+        },
         primary_communication_method: {
             type: DataTypes.STRING,
         },
