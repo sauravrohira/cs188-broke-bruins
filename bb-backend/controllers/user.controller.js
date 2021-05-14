@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
 const user = require('../models/user');
 const userServices = require('../services/user.services')
+var tokenGen = require('generate-sms-verification-code')
+const emailService = require('../services/emailService')
 
 exports.signup = async (req,res) => {
     console.log("here!");
@@ -23,9 +25,19 @@ exports.signup = async (req,res) => {
     //hash password before storing it
     password = await bcrypt.hash(password, 10);
 
+    const secretCode = tokenGen(6, {type:'number'})
+
     //add user to db
     try {
-        const addedUser = await userServices.createUser(username, password, email, primaryComm, primaryDetails)
+        const addedUser = await userServices.createUser(username, password, email, primaryComm, primaryDetails, secretCode)
+        const data = {
+            from: `Broke Bruins <brokebruins@gmail.com>`,
+            to: addedUser.email,
+            subject: "Your Activation Code for Broke Bruins",
+            text: `Please use the following code to activate your account on Broke Bruins: ${secretCode}`,
+            html: `<p>Please use the following code to activate your account on Broke Bruins: ${secretCode}</p>`,
+        };
+        await emailService.sendMail(data)
         return res.status(200).json({
             message: 'Signup Successful!',
             id: addedUser.id
@@ -67,6 +79,10 @@ exports.login = async (req,res) => {
     let result = await bcrypt.compare(password, hashedPassword)
     if (!result) {
         return res.status(401).json({ message: "Invalid Username or Password" })
+    }
+
+    if(! user.verified){
+        return res.status(401).json({message: "User email not verified!"})
     }
 
     return res.status(200).json({
