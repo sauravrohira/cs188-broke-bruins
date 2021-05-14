@@ -2,12 +2,8 @@ const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
     sequelize.define('rental', {
-        rentalId: {
-            allowNull: false,
-            type: DataTypes.STRING
-        },
         sellerId: {
-            allowNull: false,
+            allowNull: true,
             type: DataTypes.STRING
         },
         imageUrl: {
