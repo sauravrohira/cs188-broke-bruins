@@ -109,3 +109,18 @@ exports.addPicture = async (req, res) => {
         return res.status(500).json({message: "Something Failed. Try again."});
     }
 }
+
+exports.verify = async (req,res) => {
+    const userModel = sequelize.models.user
+    const {email, code} = req.body
+    const checkUser = await userServices.fetchUser(email)
+    if(checkUser.secretCode == code) {
+        const [rows, [User]] = await userModel.update({
+            verified: true
+        }, { returning: true, where: { id: checkUser.id } });
+        res.status(200).json({ message: "The code matched! User verified!" })
+    } 
+    else {
+        res.status(401).json({ message: "The code does not match!" })
+    }
+}
