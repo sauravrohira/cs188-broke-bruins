@@ -50,7 +50,7 @@ useEffect(() => {
                     <span className="Price-value">{listing.price}</span>
                 </div>
             </div>
-          <div>
+          <div className="Rental-offer">
             <Button>See Offers</Button>
           </div>
         </div>
