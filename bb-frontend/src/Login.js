@@ -55,7 +55,7 @@ function Login(props) {
       </div>
       {incorrectLogin ? <AlertDialog/> : <div></div>}
       {incorrectSignup ? <AlertDialog/> : <div></div>}
-      {successfulSignup ? <div>WELCOME!</div> : <div></div>}
+      {successfulSignup ? <div>Please verify your email address. Following that, you may log in. </div> : <div></div>}
     <div className="Login-and-signup">
       <div className="Login">
         <div className="Login-and-signup-prompt"> Existing User? </div>

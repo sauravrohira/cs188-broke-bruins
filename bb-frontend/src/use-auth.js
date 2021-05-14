@@ -33,6 +33,29 @@ import React, {
       // should be userObject
       return response;
     },
+    async getOffers(userId) {
+      let response = await fetch("http://localhost:8000/api/offer/getUsersOfferListings", {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Credentials': 'include'
+        },
+        body: JSON.stringify({userId})
+      }).then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Unsuccessful Login');
+        }
+      })
+      .catch(err => {
+        if (err.status === 401) {
+          return null;
+        }
+      });
+
+      return response;
+    },
     async logout() {
       return true;
       // let response = await fetch("/api/logout", {
@@ -166,6 +189,16 @@ import React, {
         return response;
       })
     };
+
+    const getOffers = (userId) => {
+      return auth.getOffers(userId)
+      .then(response => {
+        if (response === null) {
+          return null;
+        }
+        return response;
+      })
+    };
   
     const logout = ()  => {
       return auth.logout()
@@ -209,7 +242,8 @@ import React, {
       login,
       logout,
       refresh,
-      signup
+      signup, 
+      getOffers
     };
   }
   

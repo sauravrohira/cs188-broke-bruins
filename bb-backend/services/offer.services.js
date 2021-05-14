@@ -1,7 +1,8 @@
+const user = require('../models/user');
 const sequelize = require('./db');
+const offer = sequelize.models.offer;
 
 exports.createOffer = async (req, res) => {
-    const offer = sequelize.models.offer;
     try {
         const Offer = await offer.create({
             buyerId: req.body.buyerId,
@@ -17,7 +18,6 @@ exports.createOffer = async (req, res) => {
 }
 
 exports.updateOffer = async (req,res) => {
-    const offer = sequelize.models.offer;
     try {
         const [rows, [Offer]] = await offer.update({
             buyerId: req.body.buyerId,
@@ -37,7 +37,6 @@ exports.updateOffer = async (req,res) => {
 }
 
 exports.deleteOffer = async (req,res) => {
-    const offer = sequelize.models.offer;
     try {
         const deleted = await offer.destroy({ where: { id: req.body.id } });
 
@@ -51,7 +50,6 @@ exports.deleteOffer = async (req,res) => {
 }
 
 exports.getOffer = async (req,res) => {
-    const offer = sequelize.models.offer;
     try {
         offer.findOne({ where: { id: req.body.id } }).then(offer => res.json(offer));
     } catch(err) {
@@ -60,7 +58,6 @@ exports.getOffer = async (req,res) => {
 }
 
 exports.getAllOffers = async (req,res) => {
-    const offer = sequelize.models.offer;
     try {
         offer.findAll().then(offer => res.json(offer));
     } catch(err) {
@@ -69,9 +66,23 @@ exports.getAllOffers = async (req,res) => {
 }
 
 exports.getListingOffers = async (req,res) => {
-    const offer = sequelize.models.offer;
     try {
         offer.findAll({ where: { listingId: req.body.listingId } }).then(offer => res.json(offer));
+    } catch(err) {
+        return res.status(500).send(err.message);
+    }
+}
+
+exports.getUsersOfferListings = async (req,res) => {
+    const RentalController = require('../controllers/rental.controller');
+    try {
+        const userOffers = await offer.findAll({ where: { buyerId: req.body.userId } });
+        var listings = [];
+        for (var i = 0; i < userOffers.length; i++) {
+            listings.push(await userOffers[i].getRental());
+        }
+        console.log(listings);
+        return res.status(200).send(listings);
     } catch(err) {
         return res.status(500).send(err.message);
     }

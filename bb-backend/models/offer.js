@@ -8,7 +8,7 @@ module.exports = (sequelize) => {
         },
         sellerId: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         listingId: {
             type: DataTypes.STRING,

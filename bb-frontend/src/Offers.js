@@ -1,12 +1,24 @@
 import './App.css';
 import { useState, useEffect } from 'react';
+import { useAuth } from "./use-auth.js"
 
 function Offers() {
 
-const [offers, setOffers] = useState(null);
+  const auth = useAuth();
+  const userId = auth.user.id;
+  const [offers, setOffers] = useState("oops")
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Credentials': 'include'
+    },
+    body: JSON.stringify({userId})
+  }
 
-useEffect(() => {
-    fetch("http://localhost:8000/api/offer/getAllOffers")
+  useEffect(() => {
+    async function getListings() {
+    fetch("http://localhost:8000/api/offer/getUsersOfferListings", options)
         .then(res => res.json())
         .then(
         (result) => {
@@ -16,11 +28,13 @@ useEffect(() => {
             setOffers(error);
         }
         )
-    }, [])
+      }
+      getListings();
+  }, [])
 
   return (
     <div>
-      My Offers: {JSON.stringify(offers)}
+      {JSON.stringify(offers)}
     </div>
   );
 }
