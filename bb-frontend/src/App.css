@@ -184,10 +184,8 @@
 }
 
 .Listing-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  color: #f6e0b5 
+  
 }
 
 .Search-bar {

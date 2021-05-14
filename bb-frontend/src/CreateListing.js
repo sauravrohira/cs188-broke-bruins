@@ -5,22 +5,37 @@ import TextField from '@material-ui/core/TextField';
 
 function CreateListing(props) {
 
-     const [imageUrl, setImageUrl] = useState('');
-     const [price, setPrice] = useState(0);
+     const [imageUrl, setImageUrl] = useState(null);
+     const [price, setPrice] = useState(null);
      const [title, setTitle] = useState('');
      const [description, setDescription] = useState('');
      const [listingCreated, setListingCreated] = useState(false);
 
     const createPost = () => {
         console.log('creating post!')
-        let post = {}
-        post.sellerId = props.id;
-        post.imageUrl = imageUrl;
-        post.price = price;
-        post.sold = false;
-        post.title = title;
-        post.description = description;
-        console.log(post)
+        let rental = {}
+        rental.userId = props.id;
+        rental.imageUrl = imageUrl;
+        rental.price = price;
+        rental.sold = false;
+        rental.title = title;
+        rental.description = description;
+        console.log(JSON.stringify(rental))
+
+        if(price == null || title == '' || description == ''){
+            return
+        }
+        
+        const options = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(rental)
+        }
+
+        fetch("http://localhost:8000/api/rental/createListing", options)
+        .then(res => res.json())
+        .then(result => console.log('Listing created with id: ', result.Rental.id))
+        .catch(err => console.log(err))
     }
 
     const handleImageUpload = () => {
@@ -44,11 +59,11 @@ function CreateListing(props) {
     }
 
     return(
-        <div>
-            <h1> Create a Listing </h1>
-            <form onSubmit={createPost} className='Login-Form'>
-                <div>
-                    <TextField 
+        <div className='App'>
+            <h1 style={{color:"#f6e0b5"}}> Create a Listing </h1>
+            <form onSubmit={createPost}>
+                <div className='Login-field'>
+                    <TextField className='Login-field'
                         id="outlined-basic" 
                         label='Title' 
                         variant='outlined'
@@ -56,7 +71,7 @@ function CreateListing(props) {
                         onChange={(e)=> setTitle(e.target.value)}>
                     </TextField>
                 </div>
-                <div>
+                <div className='Login-field'>
                     <TextField 
                         id="outlined-basic" 
                         label='Price' 
@@ -65,7 +80,7 @@ function CreateListing(props) {
                         onChange={(e)=> setPrice(parseInt(e.target.value))}>
                     </TextField>
                 </div>
-                <div>
+                <div className='Login-field'>
                     <TextField 
                         id="outlined-basic" 
                         label='Description' 
@@ -74,17 +89,17 @@ function CreateListing(props) {
                         onChange={(e)=> setDescription(e.target.value)}>
                     </TextField>
                 </div>
-                <div>
-                    <p>Upload an Image!</p>
+                <div className='Login-field'>
+                    <p style={{color:'white'}}>Upload an Image!</p>
                     <form>
                         <div>
-                            <input type="file"/>
+                            <input type="file" style={{color: 'white'}}/>
                         </div>
                         <button type="button" onClick={handleImageUpload}>Upload</button>
                     </form>
-                    {imageUrl && (<img src={imageUrl} className="displayed-image" height="150"/>)}
+                    {imageUrl && (<img src={imageUrl} className="displayed-image" height="150" styles={{padding:'15'}}/> )}
                 </div>
-                <Button type="submit" variant="contained" color="primary">
+                <Button type="button" variant="contained" color="primary" onClick={createPost}>
                     Submit
                 </Button>
             </form>
