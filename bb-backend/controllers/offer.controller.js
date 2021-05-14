@@ -23,3 +23,7 @@ exports.getAllOffers = async (req,res) => {
 exports.getListingOffers = async (req,res) => {
     return OfferService.getListingOffers(req, res)
 }
+
+exports.getUsersOfferListings = async (req,res) => {
+    return OfferService.getUsersOfferListings(req, res)
+}
