@@ -63,6 +63,10 @@ function Rental(props) {
 
 function RentalList() {
 
+
+    const auth = useAuth(); 
+    const userId = auth.user.id;
+
     const [listings, setListings] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
     const [input, setInput] = useState('');
@@ -76,12 +80,17 @@ function RentalList() {
         setSearchTerm(filtered);
       }
 
+    const setFilteredListings = (result) => {
+        const filteredListings = result.filter(result => result.sellerId !== userId)
+        setListings(filteredListings);
+    }
+
     useEffect(() => {
         fetch("http://localhost:8000/api/rental/getAllListings")
             .then(res => res.json())
             .then(
             (result) => {
-                setListings(result);
+                setFilteredListings(result);
             },
             (error) => {
                 setListings(error);

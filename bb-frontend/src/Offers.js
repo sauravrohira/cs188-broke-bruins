@@ -6,7 +6,7 @@ function Offers() {
 
   const auth = useAuth();
   const userId = auth.user.id;
-  const [offers, setOffers] = useState("oops")
+  const [offers, setOffers] = useState(null)
   const options = {
     method: 'GET',
     headers: {
@@ -32,7 +32,14 @@ function Offers() {
 
   return (
     <div>
-      {JSON.stringify(offers)}
+      {offers && offers.map(listing => (
+        <div className="Rental-card">
+          <div>
+            <div className="Rental-info">{listing.title}</div>
+            <div className="Rental-info">{listing.description}</div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
