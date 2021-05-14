@@ -19,3 +19,8 @@ exports.fetchUser = async (email) => {
     const user = await userModel.findOne({where: {email:email}});
     return user;
 }
+
+exports.addUserPicture = async (id, url) => {
+    const result = await userModel.update({imageUrl: url}, {where: {id: id}})
+    return result
+}
