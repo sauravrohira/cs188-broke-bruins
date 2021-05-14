@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const user = require('../models/user');
 const userServices = require('../services/user.services')
 const cryptoRandomString = require("crypto-random-string");
+const emailService = require('../services/emailService')
 
 exports.signup = async (req,res) => {
     console.log("here!");
@@ -21,34 +22,6 @@ exports.signup = async (req,res) => {
         })
     }
 
-    //nodemailer config
-    let transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          type: 'OAuth2',
-          user: process.env.MAIL_USERNAME,
-          pass: process.env.MAIL_PASSWORD,
-          clientId: process.env.OAUTH_CLIENTID,
-          clientSecret: process.env.OAUTH_CLIENT_SECRET,
-          refreshToken: process.env.OAUTH_REFRESH_TOKEN
-        }
-    });
-
-    let mailOptions = {
-        from: raghavdhall@gmail.com,
-        to: email,
-        subject: 'Welcome to Broke Bruins!',
-        text: 'Hi, this is your verification email!'
-    };
-
-    transporter.sendMail(mailOptions, function(err, data) {
-        if (err) {
-          console.log("Error " + err);
-        } else {
-          console.log("Email sent successfully");
-        }
-    });
-
     //hash password before storing it
     password = await bcrypt.hash(password, 10);
 
@@ -57,6 +30,14 @@ exports.signup = async (req,res) => {
     //add user to db
     try {
         const addedUser = await userServices.createUser(username, password, email, primaryComm, primaryDetails, secretCode)
+        const data = {
+            from: `Broke Bruins <brokebruins@gmail.com>`,
+            to: addedUser.email,
+            subject: "Your Activation Code for Broke Bruins",
+            text: `Please use the following code to activate your account on Broke Bruins: ${secretCode}`,
+            html: `<p>Please use the following code to activate your account on Broke Bruins: ${secretCode}</p>`,
+        };
+        await emailService.sendMail(data)
         return res.status(200).json({
             message: 'Signup Successful!',
             id: addedUser.id
