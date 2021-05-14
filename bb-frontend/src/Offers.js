@@ -1,22 +1,33 @@
 import './App.css';
 import { useState, useEffect } from 'react';
+import { useAuth } from "./use-auth.js"
 
 function Offers() {
 
-const [offers, setOffers] = useState(null);
+  const userId = useAuth().user.id;
+  const [offers, setOffers] = useState(null);
 
-useEffect(() => {
-    fetch("http://localhost:8000/api/offer/getAllOffers")
-        .then(res => res.json())
-        .then(
-        (result) => {
-            setOffers(result);
+  useEffect(() => {
+    fetch("http://localhost:8000/api/offer/getUsersOfferListings", {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Credentials': 'include'
         },
-        (error) => {
-            setOffers(error);
+        body: JSON.stringify({userId})
+      }).then((response) => {
+        if (response.ok) {
+          setOffers(response)
+        } else {
+          throw new Error('Unable to Get Offers');
         }
-        )
-    }, [])
+      })
+      .catch(err => {
+        if (err.status === 401) {
+          return null;
+        }
+    });
+  });
 
   return (
     <div>

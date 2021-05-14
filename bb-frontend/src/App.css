@@ -105,7 +105,6 @@
   margin: 20px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   border-style: solid;
   border-color: #66545e;
@@ -115,11 +114,17 @@
 .Rental-info {
   padding: 20px;
   text-align: left;
+  flex-basis: 70%;
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 
 .Rental-image {
   height: 120px;
   margin: 20px;
+}
+
+.Rental-offer {
 }
 
 .Profile {
@@ -183,4 +188,18 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.Search-bar {
+  border-radius: 1rem;
+  height: 32px;
+  font-size: 20px;
+  padding: 10px;
+}
+
+.Search-bar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 48px;
 }
