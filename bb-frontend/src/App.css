@@ -91,3 +91,21 @@
   height: 120px;
   margin: 20px;
 }
+
+.Image-Upload-Box{
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-style: solid;
+  border-color: #66545e;
+  border-radius: 1rem;
+}
+
+.Listing-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import './App.css'
 class ImageUpload extends Component {
     state = {
         imageUrl: null,
@@ -30,7 +30,7 @@ class ImageUpload extends Component {
     render() {
         const {imageUrl} = this.state
         return (
-        <div>
+        <div className="ImageUploadBox">
             <section>
                 <form>
                     <div>
