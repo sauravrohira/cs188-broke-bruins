@@ -1,6 +1,7 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import { useAuth } from "./use-auth.js"
+import Button from '@material-ui/core/Button';
 
 function Listings() {
   
@@ -37,9 +38,20 @@ useEffect(() => {
           <div>
               <img className="Rental-image" src={listing.imageUrl} alt="haha"/>
           </div>
+          <div className="Rental-info">
+                <div className="Title">
+                    <span className="Title-value">{listing.title}</span>
+                </div>
+                <div className="Description">
+                    <span className="Description-value">{listing.description}</span>
+                </div>
+                <div className="Price">
+                    <span className="Price-field">Price: </span>
+                    <span className="Price-value">{listing.price}</span>
+                </div>
+            </div>
           <div>
-            <div className="Rental-info">{listing.title}</div>
-            <div className="Rental-info">{listing.description}</div>
+            <Button>See Offers</Button>
           </div>
         </div>
       )) : <div>No Listings Currently.</div>}
