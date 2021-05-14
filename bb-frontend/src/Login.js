@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import AlertDialog from "./PopUp.js"
 import { useAuth } from "./use-auth.js"
+import logo from './bruins-logo.png'
 
 function Login(props) {
 
@@ -51,7 +52,7 @@ function Login(props) {
   return (
     <div className="App">
       <div className="Logo-placeholder">
-        broke bruins
+        <img src={logo} style={{height:'130px'}} alt='broke bruins'/>
       </div>
       {incorrectLogin ? <AlertDialog/> : <div></div>}
       {incorrectSignup ? <AlertDialog/> : <div></div>}
