@@ -1,7 +1,7 @@
 const sequelize = require('./db');
+const rental = sequelize.models.rental;
 
 exports.createListing = async (req,res) => {
-    const rental = sequelize.models.rental;
     try {
         const Rental = await rental.create({
             sellerId: req.body.userId,
@@ -19,7 +19,6 @@ exports.createListing = async (req,res) => {
 }
 
 exports.updateListing = async (req,res) => {
-    const rental = sequelize.models.rental;
     try {
         const [rows, [Rental]] = await rental.update({
             sellerId: req.body.userId,
@@ -41,7 +40,6 @@ exports.updateListing = async (req,res) => {
 }
 
 exports.deleteListing = async (req,res) => {
-    const rental = sequelize.models.rental;
     try {
         const deleted = await rental.destroy({ where: { id: req.body.id } });
         
@@ -55,7 +53,6 @@ exports.deleteListing = async (req,res) => {
 }
 
 exports.getUserListings = async (req,res) => {
-    const rental = sequelize.models.rental;
     try {
         rental.findAll({ where: { sellerId: req.body.userId } }).then(rental => res.json(rental));
     } catch(err) {
@@ -64,7 +61,6 @@ exports.getUserListings = async (req,res) => {
 }
 
 exports.getListing = async (req,res) => {
-    const rental = sequelize.models.rental;
     try {
         rental.findOne({ where: { id: req.body.id } }).then(rental => res.json(rental));
     } catch(err) {
@@ -73,7 +69,6 @@ exports.getListing = async (req,res) => {
 }
 
 exports.getAllListings = async (req,res) => {
-    const rental = sequelize.models.rental;
     try {
         rental.findAll().then(rental => res.json(rental));
     } catch(err) {

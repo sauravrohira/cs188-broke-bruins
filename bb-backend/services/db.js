@@ -28,6 +28,7 @@ for (const modelDefiner of modelDefiners) {
 const {user, rental, offer} = sequelize.models;
 user.hasMany(rental);
 rental.hasMany(offer);
+offer.belongsTo(rental, {foreignKey: 'listingId'});
 
 
 console.log(sequelize.models)

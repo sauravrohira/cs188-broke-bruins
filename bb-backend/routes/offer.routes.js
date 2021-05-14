@@ -7,5 +7,6 @@ OfferRouter.post('/deleteOffer/', OfferController.deleteOffer);
 OfferRouter.get('/getOffer', OfferController.getOffer);
 OfferRouter.get('/getAllOffers', OfferController.getAllOffers);
 OfferRouter.get('/getListingOffers', OfferController.getListingOffers);
+OfferRouter.get('/getUsersOfferListings', OfferController.getUsersOfferListings);
 
 module.exports = OfferRouter; 
