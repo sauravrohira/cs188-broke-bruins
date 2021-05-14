@@ -23,7 +23,8 @@ module.exports = (sequelize) => {
         },
         imageUrl: {
             allowNull: true,
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            defaultValue: null
         },
         primary_communication_method: {
             type: DataTypes.STRING,
