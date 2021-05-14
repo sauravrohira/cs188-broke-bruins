@@ -96,3 +96,16 @@ exports.login = async (req,res) => {
         secondaryDetails: user.secondary_communication_details,
     })
 }
+
+exports.addPicture = async (req, res) => {
+    const {userId, imageUrl} = req.body
+
+    try{
+        await userServices.addUserPicture(userId, imageUrl);
+        return res.status(200).json({message: "Upload Successful!"});
+    }
+    catch(err){
+        console.log(err.message);
+        return res.status(500).json({message: "Something Failed. Try again."});
+    }
+}
