@@ -6,6 +6,8 @@ import Button from '@material-ui/core/Button'
 import { useAuth } from "./use-auth.js"
 import Listings from './Listings'
 import Offers from './Offers'
+import CreateListing from './CreateListing'
+import Dialog from '@material-ui/core/Dialog';
 
 function Profile() {
 
@@ -14,6 +16,11 @@ function Profile() {
     
     const [myListingsClicked, setMyListingsClicked] = useState(true);
     const [myOffersClicked, setMyOffersClicked] = useState(false);
+    const [createListingClicked, setCreateListingClicked] = useState(false);
+
+    const handleCallback = () =>{
+        setCreateListingClicked(false);
+    }
 
     const handleMyListingsClicked = () => {
         setMyListingsClicked(true); 
@@ -25,6 +32,14 @@ function Profile() {
         setMyOffersClicked(true);
     }
 
+    const handleCreateListing = () => {
+        setCreateListingClicked(true);
+    }
+
+    const handleCloseCreateListing = () => {
+        setCreateListingClicked(false);
+    }
+
     return (
         <div className="Profile">
             <div className="Profile-details">
@@ -33,6 +48,19 @@ function Profile() {
                     <div>MY PROFILE</div>
                     <div>@{user.username}</div>
                 </div>
+            </div>
+            <div>
+                <Button onClick={handleCreateListing}>Create Listing!</Button>
+                {createListingClicked ? 
+                        <Dialog
+                         open={createListingClicked}
+                         onClose={handleCloseCreateListing}
+                         aria-labelledby="alert-dialog-title"
+                         aria-describedby="alert-dialog-description"
+                        > 
+                            <CreateListing callback={handleCallback}/> 
+                        </Dialog> 
+                       : <div/>}
             </div>
             <div className="Listings-and-offers">
                 <Button onClick={handleMyListingsClicked}>My Listings</Button>
