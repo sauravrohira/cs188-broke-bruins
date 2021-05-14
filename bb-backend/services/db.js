@@ -30,7 +30,6 @@ user.hasMany(rental);
 rental.hasMany(offer);
 offer.belongsTo(rental, {foreignKey: 'listingId'});
 
-
 console.log(sequelize.models)
 
 module.exports = sequelize;

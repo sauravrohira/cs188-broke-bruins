@@ -10,10 +10,6 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: true
         },
-        listingId: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
         confirmed: {
             type: DataTypes.BOOLEAN,
             defaultValue: false,
