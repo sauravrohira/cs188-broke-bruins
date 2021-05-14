@@ -11,7 +11,6 @@ function Home() {
   return (
     <div className="Home">
         <NavBar />
-        <ImageUpload />
         {/* <FilterBar handleOrderChange={handleOrderChange} handleSortChange={handleSortChange} sort={{forwards, orderBy}} /> */}
         <RentalList />
     </div>

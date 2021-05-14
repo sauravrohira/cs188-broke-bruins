@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 class ImageUpload extends Component {
     state = {
         imageUrl: null,
-        imageAlt: null,
     }
 
     handleImageUpload = () => {
@@ -24,27 +22,25 @@ class ImageUpload extends Component {
             .then(res => {
                 this.setState({
                     imageUrl: res.secure_url,
-                    imageAlt: `An image of ${res.original_filename}`
                 })
         })
             .catch(err => console.log(err));
     }
     
     render() {
-        const {imageUrl, imageAlt} = this.state
+        const {imageUrl} = this.state
         return (
         <div>
-            <section className="left-side">
+            <section>
                 <form>
-                    <div className="form-group">
+                    <div>
                         <input type="file"/>
                     </div>
-                    <button type="button" className="btn" onClick={this.handleImageUpload}>Submit</button>
+                    <button type="button" onClick={this.handleImageUpload}>Submit</button>
                 </form>
             </section>
-            <section className="right-side">
-                <p>The resulting image will be displayed here</p>
-                 {imageUrl && (<img src={imageUrl} alt={imageAlt} className="displayed-image"/>)}
+            <section>
+                 {imageUrl && (<img src={imageUrl} className="displayed-image" height="150"/>)}
             </section>
       </div>
         )
