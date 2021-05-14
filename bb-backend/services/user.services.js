@@ -1,13 +1,14 @@
 const sequelize = require('./db');
 const userModel = sequelize.models.user
 
-exports.createUser = async (username, password, email, primaryComm, primaryDetails) => {
+exports.createUser = async (username, password, email, primaryComm, primaryDetails, secretCode) => {
     let user = {
         username: username,
         password: password,
         email: email,
         primary_communication_method: primaryComm,
-        primary_communication_details: primaryDetails
+        primary_communication_details: primaryDetails,
+        secretCode: secretCode
     }
 
     const addedUser = await userModel.create(user);

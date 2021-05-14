@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const user = require('../models/user');
 const userServices = require('../services/user.services')
+const cryptoRandomString = require("crypto-random-string");
 
 exports.signup = async (req,res) => {
     console.log("here!");
@@ -23,9 +24,11 @@ exports.signup = async (req,res) => {
     //hash password before storing it
     password = await bcrypt.hash(password, 10);
 
+    const secretCode = cryptoRandomString({length: 6,});
+
     //add user to db
     try {
-        const addedUser = await userServices.createUser(username, password, email, primaryComm, primaryDetails)
+        const addedUser = await userServices.createUser(username, password, email, primaryComm, primaryDetails, secretCode)
         return res.status(200).json({
             message: 'Signup Successful!',
             id: addedUser.id

@@ -28,7 +28,11 @@ module.exports = (sequelize) => {
         },
         secretCode: {
             allowNull: false,
-            type: DataTypes.INTEGER,
+            type: DataTypes.INTEGER
+        },
+        imageUrl: {
+            allowNull: true,
+            type: DataTypes.STRING
         },
         primary_communication_method: {
             type: DataTypes.STRING,
