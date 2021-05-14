@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const user = require('../models/user');
 const userServices = require('../services/user.services')
-const cryptoRandomString = require("crypto-random-string");
+var tokenGen = require('generate-sms-verification-code')
 const emailService = require('../services/emailService')
 
 exports.signup = async (req,res) => {
@@ -25,7 +25,7 @@ exports.signup = async (req,res) => {
     //hash password before storing it
     password = await bcrypt.hash(password, 10);
 
-    const secretCode = cryptoRandomString({length: 6,});
+    const secretCode = tokenGen(6, {type:'number'})
 
     //add user to db
     try {
@@ -79,6 +79,10 @@ exports.login = async (req,res) => {
     let result = await bcrypt.compare(password, hashedPassword)
     if (!result) {
         return res.status(401).json({ message: "Invalid Username or Password" })
+    }
+
+    if(! user.verified){
+        return res.status(401).json({message: "User email not verified!"})
     }
 
     return res.status(200).json({
