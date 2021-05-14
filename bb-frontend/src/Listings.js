@@ -6,6 +6,7 @@ function Listings() {
 const [listings, setListings] = useState(null);
 
 useEffect(() => {
+    async function getListings() {
     fetch("http://localhost:8000/api/rental/getAllListings")
         .then(res => res.json())
         .then(
@@ -16,7 +17,9 @@ useEffect(() => {
             setListings(error);
         }
         )
-    }, [])
+      }
+      getListings();
+  }, [])
 
   return (
     <div>
