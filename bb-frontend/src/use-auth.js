@@ -230,9 +230,6 @@ import React, {
     const signup = (userObject) => {
       return auth.signup(userObject)
       .then(didSignup => {
-        // if (didSignup) {
-        //   setUser(userObject);
-        // }
         return didSignup;
       });
     }

@@ -21,6 +21,9 @@ function Login(props) {
   const [incorrectSignup, setIncorrectSignup] = useState(false);  
   const [successfulSignup, setSuccessfulSignup] = useState(false);  
 
+  const [verificationCode, setVerificationCode] = useState("");
+  const [successfulVerification, setSuccessfulVerification] = useState(false);
+
   const auth = useAuth();
 
   const handleLogin = async (evt) => {
@@ -29,6 +32,20 @@ function Login(props) {
     if (!response) {
       setIncorrectLogin(true);
     }
+  }
+
+  const handleCodeInput = async (evt) => {
+    console.log("!!", email, verificationCode)
+    const options = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({email: email, code: verificationCode})
+    }
+
+    fetch("http://localhost:8000/api/user/verify", options)
+    .then(res => res.json())
+    .then(setSuccessfulVerification(true))
+    .catch(err => console.log(err))
   }
 
   const handleSignup = async (evt) => {
@@ -89,6 +106,7 @@ function Login(props) {
             </Button>
         </form>
       </div>
+      {!successfulSignup ? 
       <div className="Signup">
         <div className="Login-and-signup-prompt"> New User? </div>
         <form onSubmit={evt => handleSignup(evt)} className="Login-and-signup-form">
@@ -148,7 +166,25 @@ function Login(props) {
               Signup
             </Button>
         </form>
-      </div>
+      </div> : 
+      (successfulVerification ? <div>WOOO</div> :
+        <form onSubmit={evt => handleCodeInput(evt)} className="Login-and-signup-form">
+            <div className="Login-and-signup-prompt">Please check your email for a verification code.</div>
+            <div className="Login-field">
+              <TextField 
+                id="Filled-basic"
+                label="Verification code" 
+                variant="outlined" 
+                onChange={(evt) => setVerificationCode(evt.target.value)} 
+                value={verificationCode}
+                required 
+                />
+            </div>
+            <Button type="submit" variant="contained" color="primary">
+              Submit
+            </Button>
+        </form>
+      )}
     </div>
   </div>
   );
