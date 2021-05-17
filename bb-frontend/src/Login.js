@@ -34,18 +34,21 @@ function Login(props) {
     }
   }
 
-  const handleCodeInput = async (evt) => {
-    console.log("!!", email, verificationCode)
+  const handleCodeInput = async () => {
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({email: email, code: verificationCode})
+      body: JSON.stringify({email: emailNew, code: verificationCode})
     }
 
-    fetch("http://localhost:8000/api/user/verify", options)
-    .then(res => res.json())
-    .then(setSuccessfulVerification(true))
-    .catch(err => console.log(err))
+    console.log("outside!!")
+
+    await fetch("http://localhost:8000/api/user/verify", options)
+    .then(res => console.log("!", res.json()))
+    .then(res => { if(res) {console.log('User Verified')}})
+    .catch(err => console.log("errrr", err))
+
+    console.log("1hooops")
   }
 
   const handleSignup = async (evt) => {
@@ -87,7 +90,7 @@ function Login(props) {
                 onChange={(evt) => setEmail(evt.target.value)} 
                 value={email}
                 type="email"
-                // required 
+                required 
                 />
             </div>
             <div className="Login-field">
@@ -95,7 +98,7 @@ function Login(props) {
                 className="Login-input" 
                 label="Password"
                 variant="outlined"
-                // required
+                required
                 onChange={(evt) => setPassword(evt.target.value)} 
                 value={password}
                 name="password" 
@@ -118,7 +121,7 @@ function Login(props) {
                 onChange={(evt) => setEmailNew(evt.target.value)} 
                 value={emailNew}
                 type="email"
-                // required 
+                required 
                 />
             </div>
             <div className="Login-field">
@@ -126,7 +129,7 @@ function Login(props) {
                 className="Login-input" 
                 label="Password"
                 variant="outlined"
-                // required
+                required
                 onChange={(evt) => setPasswordNew(evt.target.value)} 
                 value={passwordNew}
                 name="password" 
@@ -139,7 +142,7 @@ function Login(props) {
                 variant="outlined" 
                 onChange={(evt) => setUsername(evt.target.value)} 
                 value={username}
-                // required 
+                required 
                 />
             </div>
             <div className="Login-field">
@@ -149,7 +152,7 @@ function Login(props) {
                 variant="outlined" 
                 onChange={(evt) => setPrimaryComm(evt.target.value)} 
                 value={primaryComm}
-                // required 
+                required 
                 />
             </div>
             <div className="Login-field">
@@ -159,7 +162,7 @@ function Login(props) {
                 variant="outlined" 
                 onChange={(evt) => setPrimaryDetails(evt.target.value)} 
                 value={primaryDetails}
-                // required 
+                required 
                 />
             </div>
             <Button type="submit" variant="contained" color="primary">
