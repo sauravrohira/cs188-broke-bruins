@@ -3,6 +3,7 @@ const user = require('../models/user');
 const userServices = require('../services/user.services')
 var tokenGen = require('generate-sms-verification-code')
 const emailService = require('../services/emailService')
+const sequelize = require('../services/db');
 
 exports.signup = async (req,res) => {
     console.log("here!");
