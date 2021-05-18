@@ -12,12 +12,36 @@
 .Logo-placeholder {
   font-size: 48px;
   margin: 20px;
+  width: 50%;
 }
 
 .Login-and-signup {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.About-us {
+  width: 500px;
+  text-align: left;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.About-us-title {
+  font-size: 20px;
+  margin: 24px;
+  font-weight: bolder;
+  /* color: rgb(40, 40, 40); */
+}
+
+.About-us-text {
+  font-size: 20px;
+  margin: 24px;
+  line-height: 1.75rem;
+  /* color: rgb(40, 40, 40); */
 }
 
 .Login-and-signup-prompt {
