@@ -5,12 +5,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 
-export default function AlertDialog() {
+export default function AlertDialog(props) {
   const [open, setOpen] = React.useState(true);
-
-  // const handleClickOpen = () => {
-  //   setOpen(true);
-  // };
 
   const handleClose = () => {
     setOpen(false);
@@ -26,7 +22,7 @@ export default function AlertDialog() {
       >
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Incorrect Email or Password.
+            {props.errorMessage}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

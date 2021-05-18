@@ -215,24 +215,22 @@ import React, {
     };
   
     const refresh = () => {
-      return auth.refresh()
-      .then(response => {
-        if (response === null) {
-          return null;
-        }
+      return null;
+      // return auth.refresh()
+      // .then(response => {
+      //   if (response === null) {
+      //     return null;
+      //   }
   
-        console.log("in refresh", response.userObject)
-        setUser(response.userObject);
-        return response;
-      });
+      //   console.log("in refresh", response.userObject)
+      //   setUser(response.userObject);
+      //   return response;
+      // });
     };
   
     const signup = (userObject) => {
       return auth.signup(userObject)
       .then(didSignup => {
-        // if (didSignup) {
-        //   setUser(userObject);
-        // }
         return didSignup;
       });
     }

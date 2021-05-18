@@ -21,6 +21,10 @@ function Login(props) {
   const [incorrectSignup, setIncorrectSignup] = useState(false);  
   const [successfulSignup, setSuccessfulSignup] = useState(false);  
 
+  const [verificationCode, setVerificationCode] = useState("");
+  const [successfulVerification, setSuccessfulVerification] = useState(false);
+  const [insuccessfulVerification, setInsuccessfulVerification] = useState(false);
+
   const auth = useAuth();
 
   const handleLogin = async (evt) => {
@@ -29,6 +33,28 @@ function Login(props) {
     if (!response) {
       setIncorrectLogin(true);
     }
+  }
+
+  const handleCodeInput = async (evt) => {
+    evt.preventDefault();
+    const options = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({email: emailNew, code: verificationCode})
+    }
+
+    await fetch("http://localhost:8000/api/user/verify", options)
+    .then(res => { 
+      if(res.ok) {
+        setSuccessfulVerification(true);
+        setInsuccessfulVerification(false);
+      }
+      else  {
+        setInsuccessfulVerification(true);
+        setSuccessfulVerification(false);
+      }
+    }) 
+    .catch(err => console.log("Error in Verifying User: ", err))
   }
 
   const handleSignup = async (evt) => {
@@ -51,9 +77,9 @@ function Login(props) {
 
   return (
     <div className="App">
-      {incorrectLogin ? <AlertDialog/> : <div></div>}
-      {incorrectSignup ? <AlertDialog/> : <div></div>}
-      {successfulSignup ? <div>Please verify your email address. Following that, you may log in. </div> : <div></div>}
+      {incorrectLogin ? <AlertDialog errorMessage="Incorrect Login Details."/> : <div></div>}
+      {incorrectSignup ? <AlertDialog errorMessage="Incorrect Signup Details."/> : <div></div>}
+      {insuccessfulVerification ? <AlertDialog errorMessage="Incorrect Verification Code."/> : <div></div>}
       <div className="Login-and-signup">
       <div className="Logo-placeholder">
         <div className="Login-title">Broke</div>
@@ -70,7 +96,7 @@ function Login(props) {
                 onChange={(evt) => setEmail(evt.target.value)} 
                 value={email}
                 type="email"
-                // required 
+                required 
                 />
             </div>
             <div className="Login-field">
@@ -78,7 +104,7 @@ function Login(props) {
                 className="Login-input" 
                 label="Password"
                 variant="outlined"
-                // required
+                required
                 onChange={(evt) => setPassword(evt.target.value)} 
                 value={password}
                 name="password" 
@@ -89,6 +115,7 @@ function Login(props) {
             </Button>
         </form>
       </div>
+      {!successfulSignup ? 
       <div className="Signup">
         <div className="Login-and-signup-prompt"> New User? </div>
         <form onSubmit={evt => handleSignup(evt)} className="Login-and-signup-form">
@@ -100,7 +127,7 @@ function Login(props) {
                 onChange={(evt) => setEmailNew(evt.target.value)} 
                 value={emailNew}
                 type="email"
-                // required 
+                required 
                 />
             </div>
             <div className="Login-field">
@@ -108,7 +135,7 @@ function Login(props) {
                 className="Login-input" 
                 label="Password"
                 variant="outlined"
-                // required
+                required
                 onChange={(evt) => setPasswordNew(evt.target.value)} 
                 value={passwordNew}
                 name="password" 
@@ -121,7 +148,7 @@ function Login(props) {
                 variant="outlined" 
                 onChange={(evt) => setUsername(evt.target.value)} 
                 value={username}
-                // required 
+                required 
                 />
             </div>
             <div className="Login-field">
@@ -131,7 +158,7 @@ function Login(props) {
                 variant="outlined" 
                 onChange={(evt) => setPrimaryComm(evt.target.value)} 
                 value={primaryComm}
-                // required 
+                required 
                 />
             </div>
             <div className="Login-field">
@@ -141,14 +168,32 @@ function Login(props) {
                 variant="outlined" 
                 onChange={(evt) => setPrimaryDetails(evt.target.value)} 
                 value={primaryDetails}
-                // required 
+                required 
                 />
             </div>
             <Button type="submit" variant="contained" color="primary">
               Signup
             </Button>
         </form>
-      </div>
+      </div> : 
+      (successfulVerification ? <div>Thank you! You may now log in.</div> :
+        <form onSubmit={evt => handleCodeInput(evt)} className="Login-and-signup-form">
+            <div className="Login-and-signup-prompt">Please check your email for a verification code.</div>
+            <div className="Login-field">
+              <TextField 
+                id="Filled-basic"
+                label="Verification code" 
+                variant="outlined" 
+                onChange={(evt) => setVerificationCode(evt.target.value)} 
+                value={verificationCode}
+                required 
+                />
+            </div>
+            <Button type="submit" variant="contained" color="primary">
+              Submit
+            </Button>
+        </form>
+      )}
     </div>
   </div>
   );
