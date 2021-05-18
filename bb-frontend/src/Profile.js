@@ -8,6 +8,7 @@ import Listings from './Listings'
 import Offers from './Offers'
 import CreateListing from './CreateListing'
 import Dialog from '@material-ui/core/Dialog';
+import Avatar from './avatar.png';
 
 function Profile() {
 
@@ -43,15 +44,12 @@ function Profile() {
     return (
         <div className="Profile">
             <div className="Profile-details">
-                <img src="https://www.jnis.ac.in/images/ca9ef5762f5458271e00249401f67406.jpg" className="Profile-image" alt="oops"/>
+                <img src={Avatar} className="Profile-image" alt="oops"/>
                 <div>
                     <div>@{user.username}</div>
                 </div>
             </div>
             <div>
-                <div className="Create-listing">
-                    <Button onClick={handleCreateListing}>Create Listing!</Button>
-                </div>
                 {createListingClicked ? 
                         <Dialog
                          open={createListingClicked}
@@ -72,6 +70,9 @@ function Profile() {
                     <span className="Clicked-tab"> <Button onClick={handleMyOffersClicked}>My Offers</Button> </span>
                     : <span> <Button onClick={handleMyOffersClicked}>My Offers</Button> </span>
                 }
+                <span className="Create-listing">
+                    <Button onClick={handleCreateListing}>Create Listing!</Button>
+                </span>
                 <div className="Listings-and-offers-list">
                     {myOffersClicked ? <Offers/> : <div> <Listings/> </div>}
                 </div>
