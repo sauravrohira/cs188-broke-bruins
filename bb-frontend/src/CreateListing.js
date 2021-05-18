@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { useAuth } from "./use-auth.js"
 
-function CreateListing(callback) {
+function CreateListing(props) {
 
     const auth = useAuth();
     const userId = auth.user.id;
@@ -38,7 +38,11 @@ function CreateListing(callback) {
         }
 
         fetch("http://localhost:8000/api/rental/createListing", options)
-        .then(res => res.json())
+        .then(res => { 
+            if(res.ok) { 
+                props.postCreated(); 
+            }
+        })
         .then(result => console.log('Listing created with id: ', result.Rental.id))
         .catch(err => console.log(err))
 
@@ -65,7 +69,7 @@ function CreateListing(callback) {
     }
 
     return(
-        <div className='App'>
+        <div className='Create-listing-popup'>
             <h1 style={{color:"#f6e0b5"}}> Create a Listing </h1>
             <form onSubmit={createPost}>
                 <div className='Login-field'>

@@ -18,12 +18,12 @@ function Profile() {
     const [myOffersClicked, setMyOffersClicked] = useState(false);
     const [createListingClicked, setCreateListingClicked] = useState(false);
 
-    const handleCallback = () =>{
+    const handleCreatePost = () =>{
         setCreateListingClicked(false);
     }
 
     const handleMyListingsClicked = () => {
-        setMyListingsClicked(true); 
+        setMyListingsClicked(true); ``
         setMyOffersClicked(false);
     }
 
@@ -59,7 +59,7 @@ function Profile() {
                          aria-labelledby="alert-dialog-title"
                          aria-describedby="alert-dialog-description"
                         > 
-                            <CreateListing callback={handleCallback}/> 
+                            <CreateListing postCreated={handleCreatePost}/>
                         </Dialog> 
                        : <div/>}
             </div>
