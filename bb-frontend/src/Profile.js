@@ -23,7 +23,7 @@ function Profile() {
     }
 
     const handleMyListingsClicked = () => {
-        setMyListingsClicked(true); ``
+        setMyListingsClicked(true);
         setMyOffersClicked(false);
     }
 
