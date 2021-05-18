@@ -125,8 +125,3 @@ function RentalList() {
 }
 
 export default RentalList;
-
-
-    // const commonProps1 = { title: "Ski Goggles", description: "These ski goggles r great. I wear them all the time. They make me look good.", price: "$50", imageUrl: "https://cdn.shopify.com/s/files/1/0228/1357/products/skiing_mask_c529e9d6-930c-4765-a5b5-1adccdd1bdec_1024x1024.jpg?v=1474786959" };
-    // const commonProps2 = { title: "Workout Weights", description: "If you want to up those gains, these are great. Colorful too.", price: "$20", imageUrl: "" };
-    // const commonProps3 = { title: "Camping Tent - Sleeps 4", description: "Time 2 visit Joshua Tree. Take some ramen with you.", price: "$40", imageUrl: "" };

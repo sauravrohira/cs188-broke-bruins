@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: #aa6f73;
+  background-color: #b3e0f2;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -93,7 +93,7 @@
 
 .Home {
   text-align: center;
-  background-color: #aa6f73;
+  background-color: #b3e0f2;
   min-height: 100vh;
   align-items: center;
   justify-content: center;
@@ -105,13 +105,13 @@
   padding-top: 16px;
   padding-bottom: 16px;
   text-align: right;
-  background-color: #aa6f73;
+  background-color: #b3e0f2;
   width: 100%;
 }
 
 .Nav-bar {
   color: white;
-  background-color: #66545e;
+  background-color: #f2bf5e;
   width: 100%;
   align-items: center;
   text-align: right;
@@ -132,6 +132,8 @@
   border-style: solid;
   border-color: #66545e;
   border-radius: 1rem;
+  background-color: white;
+  color: black;
 }
 
 .Rental-info {
@@ -148,10 +150,11 @@
 .Rental-offer {
   margin-left: auto;
   margin-right: 24px;
+  width: 5rem;
 }
 
 .Profile {
-  background-color: #aa6f73;
+  background-color: #b3e0f2;
   width: 100%;
   min-height: 100vh;
 }
