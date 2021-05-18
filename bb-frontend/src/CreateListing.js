@@ -70,10 +70,11 @@ function CreateListing(props) {
 
     return(
         <div className='Create-listing-popup'>
-            <h1 style={{color:"#f6e0b5"}}> Create a Listing </h1>
+            <div className="Create-listing-heading"> Create a Listing </div>
             <form onSubmit={createPost}>
                 <div className='Login-field'>
                     <TextField className='Login-field'
+                        required
                         id="outlined-basic" 
                         label='Title' 
                         variant='outlined'
@@ -83,6 +84,7 @@ function CreateListing(props) {
                 </div>
                 <div className='Login-field'>
                     <TextField 
+                        required
                         id="outlined-basic" 
                         label='Price' 
                         variant='outlined'
@@ -92,6 +94,7 @@ function CreateListing(props) {
                 </div>
                 <div className='Login-field'>
                     <TextField 
+                        required
                         id="outlined-basic" 
                         label='Description' 
                         variant='outlined'
@@ -100,14 +103,14 @@ function CreateListing(props) {
                     </TextField>
                 </div>
                 <div className='Login-field'>
-                    <p style={{color:'white'}}>Upload an Image!</p>
+                    <div className="Create-listing-text">Upload an Image!</div>
                     <form>
                         <div>
-                            <input type="file" style={{color: 'white'}}/>
+                            <input type="file" style={{color: 'black'}}/>
                         </div>
                         <button type="button" onClick={handleImageUpload}>Upload</button>
                     </form>
-                    {imageUrl && (<img src={imageUrl} className="displayed-image" height="150" styles={{padding:'15'}}/> )}
+                    {imageUrl && (<img src={imageUrl} alt ="uh" className="displayed-image" height="150" styles={{padding:'15'}}/> )}
                 </div>
                 <Button type="button" variant="contained" color="primary" onClick={createPost}>
                     Submit

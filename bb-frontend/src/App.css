@@ -73,7 +73,7 @@
 }
 
 .Login-field {
-  color: red;
+  color: black;
   margin-bottom: 12px;
 }
 
@@ -241,14 +241,25 @@
 
 .Create-listing-popup {
   text-align: center;
-  background-color: #f2bf5e;
+  background-color: lightgray;
   min-height: 60vh;
+  min-width: 40vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 24px;
   font-size: calc(10px + 2vmin);
+  border-style: solid;
+}
+
+.Create-listing-heading {
+  margin: 12px;
+}
+
+.Create-listing-text {
+  color: black;
+  font-size: 14px;
 }
 
 .Create-listing {
