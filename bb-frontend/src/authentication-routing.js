@@ -4,7 +4,6 @@ import Login from './Login';
 import AboutUs from './AboutUs';
 import Home from './Home';
 import { ProvideCore } from './use-core';
-// import LoadingPage from './loading-page';
 
 export default function AuthenticationRouting(props) {
 

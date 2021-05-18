@@ -3,11 +3,6 @@ import NavBar from './NavBar';
 import RentalList from './RentalList';
 import { useState } from 'react'
 import Button from '@material-ui/core/Button';
-import ImageUpload from './ImageUpload';
-import CreateListing from './CreateListing';
-// import { useState } from 'react'
-// import Button from '@material-ui/core/Button';
-// import Input from '@material-ui/core/Input';
 import Profile from './Profile';
 
 function Home() {

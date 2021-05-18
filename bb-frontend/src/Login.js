@@ -34,21 +34,18 @@ function Login(props) {
     }
   }
 
-  const handleCodeInput = async () => {
+  const handleCodeInput = async (evt) => {
+    evt.preventDefault();
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({email: emailNew, code: verificationCode})
     }
 
-    console.log("outside!!")
-
     await fetch("http://localhost:8000/api/user/verify", options)
-    .then(res => console.log("!", res.json()))
-    .then(res => { if(res) {console.log('User Verified')}})
-    .catch(err => console.log("errrr", err))
-
-    console.log("1hooops")
+    .then(res => { if(res) {console.log('User Verified')}}) 
+    .then(setSuccessfulVerification(true))
+    .catch(err => console.log("error", err))
   }
 
   const handleSignup = async (evt) => {
@@ -73,7 +70,6 @@ function Login(props) {
     <div className="App">
       {incorrectLogin ? <AlertDialog/> : <div></div>}
       {incorrectSignup ? <AlertDialog/> : <div></div>}
-      {successfulSignup ? <div>Please verify your email address. Following that, you may log in. </div> : <div></div>}
       <div className="Login-and-signup">
       <div className="Logo-placeholder">
         <div className="Login-title">Broke</div>
@@ -170,7 +166,7 @@ function Login(props) {
             </Button>
         </form>
       </div> : 
-      (successfulVerification ? <div>WOOO</div> :
+      (successfulVerification ? <div>Thank you! You may now log in.</div> :
         <form onSubmit={evt => handleCodeInput(evt)} className="Login-and-signup-form">
             <div className="Login-and-signup-prompt">Please check your email for a verification code.</div>
             <div className="Login-field">
