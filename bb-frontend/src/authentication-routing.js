@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from './use-auth';
 import Login from './Login';
+import AboutUs from './AboutUs';
 import Home from './Home';
 import { ProvideCore } from './use-core';
 // import LoadingPage from './loading-page';
@@ -8,8 +9,13 @@ import { ProvideCore } from './use-core';
 export default function AuthenticationRouting(props) {
 
   const [loading, setLoading] = useState(true);
+  const [login, setLogin] = useState(false);
 
   const auth = useAuth();
+
+  const clickLogin = () => {
+    setLogin(true);
+  }
 
   useEffect(() => {
 
@@ -41,7 +47,10 @@ export default function AuthenticationRouting(props) {
           <Home />
         </ProvideCore>
       ) : (
-        <Login />
+
+        login ?
+        <Login /> :
+        <AboutUs clickLogin={clickLogin}/>
       )
     )
   );
