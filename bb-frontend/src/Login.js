@@ -23,6 +23,7 @@ function Login(props) {
 
   const [verificationCode, setVerificationCode] = useState("");
   const [successfulVerification, setSuccessfulVerification] = useState(false);
+  const [insuccessfulVerification, setInsuccessfulVerification] = useState(false);
 
   const auth = useAuth();
 
@@ -43,9 +44,17 @@ function Login(props) {
     }
 
     await fetch("http://localhost:8000/api/user/verify", options)
-    .then(res => { if(res) {console.log('User Verified')}}) 
-    .then(setSuccessfulVerification(true))
-    .catch(err => console.log("error", err))
+    .then(res => { 
+      if(res.ok) {
+        setSuccessfulVerification(true);
+        setInsuccessfulVerification(false);
+      }
+      else  {
+        setInsuccessfulVerification(true);
+        setSuccessfulVerification(false);
+      }
+    }) 
+    .catch(err => console.log("Error in Verifying User: ", err))
   }
 
   const handleSignup = async (evt) => {
@@ -70,6 +79,7 @@ function Login(props) {
     <div className="App">
       {incorrectLogin ? <AlertDialog/> : <div></div>}
       {incorrectSignup ? <AlertDialog/> : <div></div>}
+      {insuccessfulVerification ? <AlertDialog/> : <div></div>}
       <div className="Login-and-signup">
       <div className="Logo-placeholder">
         <div className="Login-title">Broke</div>
