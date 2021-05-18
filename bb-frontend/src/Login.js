@@ -77,9 +77,9 @@ function Login(props) {
 
   return (
     <div className="App">
-      {incorrectLogin ? <AlertDialog/> : <div></div>}
-      {incorrectSignup ? <AlertDialog/> : <div></div>}
-      {insuccessfulVerification ? <AlertDialog/> : <div></div>}
+      {incorrectLogin ? <AlertDialog errorMessage="Incorrect Login Details."/> : <div></div>}
+      {incorrectSignup ? <AlertDialog errorMessage="Incorrect Signup Details."/> : <div></div>}
+      {insuccessfulVerification ? <AlertDialog errorMessage="Incorrect Verification Code."/> : <div></div>}
       <div className="Login-and-signup">
       <div className="Logo-placeholder">
         <div className="Login-title">Broke</div>
