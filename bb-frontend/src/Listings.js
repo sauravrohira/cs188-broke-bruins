@@ -2,6 +2,7 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import { useAuth } from "./use-auth.js"
 import Button from '@material-ui/core/Button';
+import Empty from './empty-object.png';
 
 function Listings() {
   
@@ -36,7 +37,7 @@ useEffect(() => {
       {listings ? listings.map(listing => (
         <div className="Rental-card">
           <div>
-              <img className="Rental-image" src={listing.imageUrl} alt="haha"/>
+              <img className="Rental-image" src={listing.imageUrl || Empty} alt="haha"/>
           </div>
           <div className="Rental-info">
                 <div className="Title">
