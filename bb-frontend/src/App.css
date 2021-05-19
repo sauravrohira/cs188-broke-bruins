@@ -11,7 +11,6 @@
 
 .Logo-placeholder {
   font-size: 48px;
-  margin: 20px;
   width: 50%;
 }
 
@@ -57,12 +56,14 @@
   border-width: 0.1rem;
   text-align: left;
   margin: 20px;
-  padding: 40px;
+  padding-right: 40px;
+  width: 320px;
 }
 
 .Signup {
   text-align: left;
   margin: 20px;
+  width: 320px;
 }
 
 .Login-and-signup-form {
