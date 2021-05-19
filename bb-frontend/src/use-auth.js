@@ -20,10 +20,10 @@ import React, {
       })
       .then(response => {
         if (response.status == 200)
-          return true;
-          return response.json().then(response => {
+          return response.json();
+        return response.json().then(response => {
             return response.error;
-          })
+        })
       })
       .catch(err => {
           return err;
