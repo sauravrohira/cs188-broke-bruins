@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { useAuth } from "./use-auth.js"
 
-function CreateListing(callback) {
+function CreateListing(props) {
 
     const auth = useAuth();
     const userId = auth.user.id;
@@ -38,7 +38,11 @@ function CreateListing(callback) {
         }
 
         fetch("http://localhost:8000/api/rental/createListing", options)
-        .then(res => res.json())
+        .then(res => { 
+            if(res.ok) { 
+                props.postCreated(); 
+            }
+        })
         .then(result => console.log('Listing created with id: ', result.Rental.id))
         .catch(err => console.log(err))
 
@@ -65,11 +69,12 @@ function CreateListing(callback) {
     }
 
     return(
-        <div className='App'>
-            <h1 style={{color:"#f6e0b5"}}> Create a Listing </h1>
+        <div className='Create-listing-popup'>
+            <div className="Create-listing-heading"> Create a Listing </div>
             <form onSubmit={createPost}>
                 <div className='Login-field'>
                     <TextField className='Login-field'
+                        required
                         id="outlined-basic" 
                         label='Title' 
                         variant='outlined'
@@ -79,6 +84,7 @@ function CreateListing(callback) {
                 </div>
                 <div className='Login-field'>
                     <TextField 
+                        required
                         id="outlined-basic" 
                         label='Price' 
                         variant='outlined'
@@ -88,6 +94,7 @@ function CreateListing(callback) {
                 </div>
                 <div className='Login-field'>
                     <TextField 
+                        required
                         id="outlined-basic" 
                         label='Description' 
                         variant='outlined'
@@ -96,14 +103,14 @@ function CreateListing(callback) {
                     </TextField>
                 </div>
                 <div className='Login-field'>
-                    <p style={{color:'white'}}>Upload an Image!</p>
+                    <div className="Create-listing-text">Upload an Image!</div>
                     <form>
                         <div>
-                            <input type="file" style={{color: 'white'}}/>
+                            <input type="file" style={{color: 'black'}}/>
                         </div>
                         <button type="button" onClick={handleImageUpload}>Upload</button>
                     </form>
-                    {imageUrl && (<img src={imageUrl} className="displayed-image" height="150" styles={{padding:'15'}}/> )}
+                    {imageUrl && (<img src={imageUrl} alt ="uh" className="displayed-image" height="150" styles={{padding:'15'}}/> )}
                 </div>
                 <Button type="button" variant="contained" color="primary" onClick={createPost}>
                     Submit
