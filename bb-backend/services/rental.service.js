@@ -1,4 +1,6 @@
 const sequelize = require('./db');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 const rental = sequelize.models.rental;
 
 exports.createListing = async (req,res) => {
@@ -55,6 +57,43 @@ exports.deleteListing = async (req,res) => {
 exports.getUserListings = async (req,res) => {
     try {
         rental.findAll({ where: { sellerId: req.body.userId } }).then(rental => res.json(rental));
+    } catch(err) {
+        return res.status(500).send(err.message);
+    }
+}
+
+exports.getOffersOnListing = async (req,res) => {
+    try {
+        var listing = await rental.findOne({ where: { id: req.body.listingId } })
+        var offers = await listing.getOffers();
+        return res.status(200).send(offers); 
+    } catch(err) {
+        return res.status(500).send(err.message);
+    }
+}
+
+exports.getAllButUserListings = async (req,res) => {
+    try {
+        var allButUserRentals = await rental.findAll({ where: { sellerId: { [Op.ne]: req.body.userId } } });
+        var listings = [];
+        for(var i = 0; i < allButUserRentals.length; i++) {
+            var listing = allButUserRentals[i];
+            var offers = await allButUserRentals[i].getOffers();
+            var match = false;
+            for(var j = 0; j < offers.length; j++) {
+                if(offers[j].buyerId == req.body.userId) {
+                    match = true;
+                    break;
+                }
+            }
+            if(match) {
+                listing.dataValues.offerPlaced = true;
+            } else {
+                listing.dataValues.offerPlaced = false;
+            }
+            listings.push(listing);
+        }
+        return res.status(200).send(listings);
     } catch(err) {
         return res.status(500).send(err.message);
     }
