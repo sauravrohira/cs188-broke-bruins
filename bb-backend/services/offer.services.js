@@ -1,4 +1,3 @@
-const user = require('../models/user');
 const sequelize = require('./db');
 const offer = sequelize.models.offer;
 
@@ -74,7 +73,6 @@ exports.getListingOffers = async (req,res) => {
 }
 
 exports.getUsersOfferListings = async (req,res) => {
-    const RentalController = require('../controllers/rental.controller');
     try {
         const userOffers = await offer.findAll({ where: { buyerId: req.query.userId } });
         var listings = [];
