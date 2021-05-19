@@ -17,13 +17,13 @@ import React, {
           'Accept': 'application/json'
         },
         body: JSON.stringify({email, password})
-      }).then(res => res.json())
+      })
       .then(response => {
         if (response.status == 200)
           return true;
-        else {
-          return response.error;
-        }
+          return response.json().then(response => {
+            return response.error;
+          })
       })
       .catch(err => {
           return err;
@@ -123,13 +123,12 @@ import React, {
         },
         body: JSON.stringify(obj)
       })
-      .then(res => res.json())
       .then(response => {
         if (response.status == 200)
           return true;
-        else {
+        return response.json().then(response => {
           return response.errors ? response.errors[0].msg : response.error;
-        }
+        })
       })
       .catch(err => {
           return err;
@@ -179,7 +178,8 @@ import React, {
         if (response === null) {
           return null;
         }
-  
+        
+        console.log("!!", response);
         setUser(response)
         return response;
       })
@@ -222,7 +222,6 @@ import React, {
     const signup = (userObject) => {
       return auth.signup(userObject)
       .then(response => {
-        console.log("!!", response);
         return response;
       });
     }
