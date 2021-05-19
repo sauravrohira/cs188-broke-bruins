@@ -16,6 +16,14 @@ exports.getUserListings = async (req,res) => {
     return RentalService.getUserListings(req, res)
 }
 
+exports.getOffersOnListing = async (req,res) => {
+    return RentalService.getOffersOnListing(req, res)
+}
+
+exports.getAllButUserListings = async (req,res) => {
+    return RentalService.getAllButUserListings(req, res)
+}
+
 exports.getListing = async (req,res) => {
     return RentalService.getListing(req, res)
 }
