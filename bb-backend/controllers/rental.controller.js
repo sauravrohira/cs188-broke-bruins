@@ -1,4 +1,6 @@
 const RentalService = require('../services/rental.service');
+const {validationResult} = require('express-validator');
+
 
 exports.createListing = async (req,res) => {
     const errors = validationResult(req);
