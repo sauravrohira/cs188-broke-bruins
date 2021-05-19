@@ -27,7 +27,7 @@ for (const modelDefiner of modelDefiners) {
 //Define Associations:
 const {user, rental, offer} = sequelize.models;
 user.hasMany(rental);
-rental.hasMany(offer);
+rental.hasMany(offer, {foreignKey: 'listingId'});
 offer.belongsTo(rental, {foreignKey: 'listingId'});
 
 console.log(sequelize.models)

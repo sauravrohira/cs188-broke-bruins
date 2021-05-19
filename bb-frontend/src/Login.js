@@ -17,6 +17,7 @@ function Login(props) {
   const [username, setUsername] = useState("");
   const [primaryComm, setPrimaryComm] = useState("");
   const [primaryDetails, setPrimaryDetails] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [incorrectSignup, setIncorrectSignup] = useState(false);  
   const [successfulSignup, setSuccessfulSignup] = useState(false);  
@@ -58,6 +59,7 @@ function Login(props) {
   }
 
   const handleSignup = async (evt) => {
+    setIncorrectSignup(false);
     evt.preventDefault();
     const userObj = {
       passwordNew, 
@@ -67,8 +69,9 @@ function Login(props) {
       primaryDetails
     }
     let response = await auth.signup(userObj);
-    if (!response) {
+    if (response != true) {
       setIncorrectSignup(true);
+      setErrorMessage(response);
     }
     else {
       setSuccessfulSignup(true);
@@ -78,7 +81,7 @@ function Login(props) {
   return (
     <div className="App">
       {incorrectLogin ? <AlertDialog errorMessage="Incorrect Login Details."/> : <div></div>}
-      {incorrectSignup ? <AlertDialog errorMessage="Incorrect Signup Details."/> : <div></div>}
+      {incorrectSignup ? <AlertDialog errorMessage={errorMessage}/> : <div></div>}
       {insuccessfulVerification ? <AlertDialog errorMessage="Incorrect Verification Code."/> : <div></div>}
       <div className="Login-and-signup">
       <div className="Logo-placeholder">
@@ -122,7 +125,7 @@ function Login(props) {
             <div className="Login-field">
               <TextField 
                 id="Filled-basic"
-                label="Email Address" 
+                label="UCLA Email Address" 
                 variant="outlined" 
                 onChange={(evt) => setEmailNew(evt.target.value)} 
                 value={emailNew}

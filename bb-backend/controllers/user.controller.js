@@ -1,27 +1,20 @@
 const bcrypt = require('bcrypt');
 const user = require('../models/user');
-const userServices = require('../services/user.services')
-var tokenGen = require('generate-sms-verification-code')
-const emailService = require('../services/emailService')
+const userServices = require('../services/user.services');
+var tokenGen = require('generate-sms-verification-code');
+const emailService = require('../services/emailService');
 const sequelize = require('../services/db');
+const {validationResult} = require('express-validator');
 
 exports.signup = async (req,res) => {
-    console.log("here!");
+    
+    const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+        console.log(errors.array())
+        return res.status(422).json({ errors: errors.array() });
+	}
+
     let { username, email, password, primaryComm, primaryDetails } = req.body
-
-    // use client side validation and send non-empty username/email/password to backend
-    if (password.length < 8) {
-        return res.status(400).json({
-            error: 'Invalid password. Must have at least 8 characters.'
-        })
-    }
-
-    //check email for ucla.edu
-    if(! email.match(/.{1,}@(g.)?ucla\.edu$/)){
-        return res.status(400).json({
-            error: 'ucla.edu email required.'
-        })
-    }
 
     //hash password before storing it
     password = await bcrypt.hash(password, 10);
@@ -45,18 +38,9 @@ exports.signup = async (req,res) => {
         })
     }
     catch(err) {
-        if (err.message.includes('duplicate') && err.message.includes('username')) {
-            return res.status(400).json({
-                error: 'Username taken. Create a different username.'
-            })
-        } else if (err.message.includes('duplicate') && err.message.includes('email')) {
-            return res.status(400).json({
-                error: 'Email already in use. Use a different one.'
-            })
-        }
         console.log(err);
         return res.status(500).json({
-            error: 'Signup Error. Try resubmitting the form.'
+            error: 'Signup Error. Try resubmitting the form. If you are an existing user, please use the Login Form instead.'
         })
     }   
 }

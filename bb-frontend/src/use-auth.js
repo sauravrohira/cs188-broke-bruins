@@ -13,24 +13,22 @@ import React, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Credentials': 'include'
+          'Credentials': 'include',
+          'Accept': 'application/json'
         },
         body: JSON.stringify({email, password})
-      }).then((response) => {
-        // console.log("response", response.status)
-        if (response.ok) {
+      })
+      .then(response => {
+        if (response.status == 200)
           return response.json();
-        } else {
-          throw new Error('Unsuccessful Login');
-        }
+        return response.json().then(response => {
+            return response.error;
+        })
       })
       .catch(err => {
-        if (err.status === 401) {
-          return null;
-        }
+          return err;
       });
 
-      // should be userObject
       return response;
     },
     async getOffers(userId) {
@@ -50,7 +48,7 @@ import React, {
       })
       .catch(err => {
         if (err.status === 401) {
-          return null;
+          throw new Error(err);
         }
       });
 
@@ -109,7 +107,6 @@ import React, {
       return response;
     },
     async signup(userObject) {
-      console.log("!!!", userObject);
       const obj = {
         email: userObject.emailNew,
         password: userObject.passwordNew, 
@@ -121,23 +118,20 @@ import React, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Credentials': 'include'
+          'Credentials': 'include',
+          'Accept': 'application/json'
         },
         body: JSON.stringify(obj)
       })
       .then(response => {
-        if (response.status === 200) {
+        if (response.status == 200)
           return true;
-        }
-        else {
-          return false;
-        }
+        return response.json().then(response => {
+          return response.errors ? response.errors[0].msg : response.error;
+        })
       })
       .catch(err => {
-        if (err.status === 401) {
-          return false;
-        }
-        return false;
+          return err;
       });
   
       return response;
@@ -184,7 +178,8 @@ import React, {
         if (response === null) {
           return null;
         }
-  
+        
+        console.log("!!", response);
         setUser(response)
         return response;
       })
@@ -206,10 +201,6 @@ import React, {
         if (didLogout) {
           setUser(null);
         }
-        else {
-          // do something maybe??
-        }
-  
         return didLogout;
       });
     };
@@ -230,8 +221,8 @@ import React, {
   
     const signup = (userObject) => {
       return auth.signup(userObject)
-      .then(didSignup => {
-        return didSignup;
+      .then(response => {
+        return response;
       });
     }
   
