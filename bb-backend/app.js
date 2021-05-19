@@ -1,23 +1,14 @@
 const express = require('express');
 const sequelize = require('./services/db');
 const cors = require('cors')
-// const helmet = require('helmet')
-const {check} = require('express-validator')
+const helmet = require('helmet')
 
 
 const app = express();
 app.use(express.json());
 app.use(cors());
-// app.use(helmet());
+app.use(helmet());
 const port = process.env.PORT || "8000";
-
-//escape all input to prevent xss
-app.use(function(req, res, next) {
-  for (var item in req.body) {
-    check(item).escape();
-  }
-  next();
-});
 
 async function assertDatabaseConnectionOk() {
     console.log('Checking database connection...');
