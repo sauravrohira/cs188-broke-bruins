@@ -40,29 +40,15 @@ function CreateListing(callback) {
 
         fetch("http://localhost:8000/api/rental/createListing", options)
         .then(res => res.json())
-        .then(result => console.log('Listing created with id: ', result.Rental.id))
+        .then(result => {
+            console.log('Listing created with id: ', result.Rental.id);
+            setListingCreated(true);
+            })
         .catch(err => console.log(err))
 
     }
 
     const handleImageUpload = () => {
-        // const { files } = document.querySelector('input[type="file"]')
-        // const formData = new FormData();
-        // formData.append('file', files[0]);
-        // // replace this with your upload preset name
-        // formData.append('upload_preset', 'qy7jp6yj');
-        // const options = {
-        //     method: 'POST',
-        //     body: formData,
-        // };
-
-        // // replace cloudname with your Cloudinary cloud_name
-        // return fetch('https://api.Cloudinary.com/v1_1/dwb7bm6hn/image/upload', options)
-        //     .then(res => res.json())
-        //     .then(res => {
-        //         setImageUrl(res.secure_url)
-        //     })
-        //     .catch(err => console.log(err));
 
         // Create an object of formData
         const formData = new FormData();
@@ -76,15 +62,13 @@ function CreateListing(callback) {
             body: formData
         };
 
-        console.log(options)
-
-        let url
-        try{
-            const res = fetch("http://localhost:8000/api/image/upload", options)
-        }
-        catch(err){
-            console.log(err)
-        }
+        // replace cloudname with your Cloudinary cloud_name
+        return fetch('http://localhost:8000/api/image/upload', options)
+            .then(res => res.json())
+            .then(res => {
+                setImageUrl(res.url)
+            })
+            .catch(err => console.log(err));
     }
 
     return(
