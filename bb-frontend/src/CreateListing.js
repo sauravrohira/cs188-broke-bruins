@@ -10,6 +10,7 @@ function CreateListing(props) {
     const userId = auth.user.id;
 
     const [imageUrl, setImageUrl] = useState(null);
+    const [imageFile, setImageFile] = useState(null);
     const [price, setPrice] = useState(null);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -49,23 +50,45 @@ function CreateListing(props) {
     }
 
     const handleImageUpload = () => {
-        const { files } = document.querySelector('input[type="file"]')
+        // const { files } = document.querySelector('input[type="file"]')
+        // const formData = new FormData();
+        // formData.append('file', files[0]);
+        // // replace this with your upload preset name
+        // formData.append('upload_preset', 'qy7jp6yj');
+        // const options = {
+        //     method: 'POST',
+        //     body: formData,
+        // };
+
+        // // replace cloudname with your Cloudinary cloud_name
+        // return fetch('https://api.Cloudinary.com/v1_1/dwb7bm6hn/image/upload', options)
+        //     .then(res => res.json())
+        //     .then(res => {
+        //         setImageUrl(res.secure_url)
+        //     })
+        //     .catch(err => console.log(err));
+
+        // Create an object of formData
         const formData = new FormData();
-        formData.append('file', files[0]);
-        // replace this with your upload preset name
-        formData.append('upload_preset', 'qy7jp6yj');
+        
+        // Update the formData object
+        formData.append("image", imageFile);
+        
+        // Details of the uploaded file
         const options = {
             method: 'POST',
-            body: formData,
+            body: formData
         };
 
-        // replace cloudname with your Cloudinary cloud_name
-        return fetch('https://api.Cloudinary.com/v1_1/dwb7bm6hn/image/upload', options)
-            .then(res => res.json())
-            .then(res => {
-                setImageUrl(res.secure_url)
-            })
-            .catch(err => console.log(err));
+        console.log(options)
+
+        let url
+        try{
+            const res = fetch("http://localhost:8000/api/image/upload", options)
+        }
+        catch(err){
+            console.log(err)
+        }
     }
 
     return(
@@ -106,7 +129,7 @@ function CreateListing(props) {
                     <div className="Create-listing-text">Upload an Image!</div>
                     <form>
                         <div>
-                            <input type="file" style={{color: 'black'}}/>
+                            <input type="file" style={{color: 'black'}} encty onChange={ e => setImageFile(e.target.files[0])}/>
                         </div>
                         <button type="button" onClick={handleImageUpload}>Upload</button>
                     </form>
