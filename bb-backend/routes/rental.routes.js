@@ -1,7 +1,8 @@
 const RentalRouter = require('express').Router();
 const RentalController = require('../controllers/rental.controller');
+const {createListingValidator} = require('../utils/validators');
 
-RentalRouter.post('/createListing', RentalController.createListing);
+RentalRouter.post('/createListing', createListingValidator, RentalController.createListing);
 RentalRouter.post('/updateListing', RentalController.updateListing);
 RentalRouter.post('/deleteListing', RentalController.deleteListing);
 RentalRouter.get('/getUserListings', RentalController.getUserListings);
