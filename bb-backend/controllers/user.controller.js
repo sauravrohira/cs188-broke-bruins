@@ -40,7 +40,7 @@ exports.signup = async (req,res) => {
     catch(err) {
         console.log(err);
         return res.status(500).json({
-            error: 'Signup Error. Try resubmitting the form.'
+            error: 'Signup Error. Try resubmitting the form. If you are an existing user, please use the Login Form instead.'
         })
     }   
 }

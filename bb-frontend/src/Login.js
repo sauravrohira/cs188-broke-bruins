@@ -59,6 +59,7 @@ function Login(props) {
   }
 
   const handleSignup = async (evt) => {
+    setIncorrectSignup(false);
     evt.preventDefault();
     const userObj = {
       passwordNew, 

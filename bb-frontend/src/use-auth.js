@@ -128,7 +128,7 @@ import React, {
         if (response.status == 200)
           return true;
         else {
-          return response.error;
+          return response.errors ? response.errors[0].msg : response.error;
         }
       })
       .catch(err => {
@@ -222,6 +222,7 @@ import React, {
     const signup = (userObject) => {
       return auth.signup(userObject)
       .then(response => {
+        console.log("!!", response);
         return response;
       });
     }
