@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 // import { navigate } from "@reach/router"
 import { useAuth } from "./use-auth.js"
 import SearchBar from './SearchBar';
+import Empty from './empty-object.png';
 
 function Rental(props) {
 
@@ -39,7 +40,7 @@ function Rental(props) {
         <div className="Rental-card">
             <div>
                 <div className="Image">
-                    <img src={props.imageUrl} className="Rental-image" alt="oops"/>
+                    <img src={props.imageUrl || Empty} className="Rental-image" alt="oops"/>
                 </div>
             </div>
             <div className="Rental-info">
@@ -50,7 +51,7 @@ function Rental(props) {
                     <span className="Description-value">{props.description}</span>
                 </div>
                 <div className="Price">
-                    <span className="Price-field">Price: </span>
+                    <span className="Price-field">Price: $</span>
                     <span className="Price-value">{props.price}</span>
                 </div>
             </div>
