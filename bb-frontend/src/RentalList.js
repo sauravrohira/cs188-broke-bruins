@@ -6,15 +6,19 @@ import Button from '@material-ui/core/Button';
 import { useAuth } from "./use-auth.js"
 import SearchBar from './SearchBar';
 import Empty from './empty-object.png';
+// import Dialog from '@material-ui/core/Dialog';
 
 function Rental(props) {
 
     const auth = useAuth(); 
     const user = auth.user;
     const buyerId = user.id; 
-    const listingId = props.id; 
+    const listingId = props.id;
+
+    const [offerPlaced, setOfferPlaced] = useState(props.offerPlaced);
 
     const handlePlaceOffer = async () => {
+
         fetch("http://localhost:8000/api/offer/createOffer", {
         method: 'POST',
         headers: {
@@ -22,11 +26,12 @@ function Rental(props) {
           'Credentials': 'include'
         },
         body: JSON.stringify({buyerId, listingId})
-      }).then((response) => {
+        }).then((response) => {
         if (response.ok) {
-          return response.json();
+            setOfferPlaced(true);
+            return response.json();
         } else {
-          throw new Error('Unsuccessful Offer Placement');
+            throw new Error('Unsuccessful Offer Placement');
         }
       })
       .catch(err => {
@@ -56,7 +61,10 @@ function Rental(props) {
                 </div>
             </div>
             <div className="Rental-offer">
-                <Button onClick={handlePlaceOffer}>Place Offer!</Button>
+                {!offerPlaced ?
+                    <Button onClick={handlePlaceOffer}>Place Offer!</Button> :
+                    <span>Offer Placed!</span>
+                }
             </div>
         </div>
       )
