@@ -87,7 +87,7 @@ function RentalList() {
     }
 
     useEffect(() => {
-        fetch("http://localhost:8000/api/rental/getAllListings")
+        fetch(`http://localhost:8000/api/rental/getAllButUserListings?userId=${userId}`)
             .then(res => res.json())
             .then(
             (result) => {

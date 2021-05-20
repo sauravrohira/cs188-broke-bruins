@@ -17,6 +17,7 @@ function Listings() {
     setSeeOffersClicked(false);
   }
 
+
   const handleSeeOffersClicked = () => {
     setSeeOffersClicked(true);
   }
@@ -31,9 +32,6 @@ function Listings() {
     if(filteredListings.length) setListings(filteredListings);
   }
 
-  // const getOffers = async(listingId) => {
-  //   console.log("hah", listingId);
-  // }
 
   useEffect(() => {
     async function getListings() {

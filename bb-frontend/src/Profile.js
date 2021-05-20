@@ -14,7 +14,6 @@ function Profile() {
 
     const auth = useAuth();
     const user = auth.user;
-    console.log("!!", user);
     
     const [myListingsClicked, setMyListingsClicked] = useState(true);
     const [myOffersClicked, setMyOffersClicked] = useState(false);
