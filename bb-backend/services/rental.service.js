@@ -64,7 +64,7 @@ exports.getUserListings = async (req,res) => {
 
 exports.getOffersOnListing = async (req,res) => {
     try {
-        var listing = await rental.findOne({ where: { id: req.body.listingId } })
+        var listing = await rental.findOne({ where: { id: req.query.listingId } })
         var offers = await listing.getOffers();
         return res.status(200).send(offers); 
     } catch(err) {
