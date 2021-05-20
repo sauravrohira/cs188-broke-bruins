@@ -5,6 +5,25 @@ import Button from '@material-ui/core/Button';
 import Empty from './empty-object.png';
 import Dialog from '@material-ui/core/Dialog';
 
+function Offer() {
+
+    return (
+      <div className="Rental-card">
+          <div className="Rental-info">
+              <div className="Title">
+                  <span className="Title-value">Username: props.username</span>
+              </div>
+              <div className="Description">
+                  <span className="Description-value">Mode of Contact: props.primaryComm</span>
+              </div>
+              <div className="Description">
+                  <span className="Description-value">Contact Details: props.primaryComm</span>
+              </div>
+          </div>
+      </div>
+    )
+}
+
 function Listings() {
   
   const auth = useAuth(); 
@@ -12,28 +31,27 @@ function Listings() {
   const [listings, setListings] = useState(null);
   const [seeOffersClicked, setSeeOffersClicked] = useState(false);
   const [currListing, setCurrListing] = useState(null);
+  const [currOffers, setCurrOffers] = useState(null);
 
   const handleCloseSeeOffers = () => {
     setSeeOffersClicked(false);
   }
 
-  const handleSeeOffersClicked = () => {
-    setSeeOffersClicked(true);
-  }
-
   const changeListingId = async(evt, listingId) => {
     evt.preventDefault(); 
     setCurrListing(listingId);
+    setSeeOffersClicked(true);
+    await fetch(`http://localhost:8000/api/rental/getOffersOnListing?listingId=${currListing}`)
+    .then(res => res.json())
+    .then((result) => {
+        // setCurrOffers(result);
+    })
   }
 
   const setFilteredListings = (result) => {
     const filteredListings = result.filter(result => result.sellerId == userId)
     if(filteredListings.length) setListings(filteredListings);
   }
-
-  // const getOffers = async(listingId) => {
-  //   console.log("hah", listingId);
-  // }
 
   useEffect(() => {
     async function getListings() {
@@ -72,7 +90,7 @@ function Listings() {
             </div>
           <div className="Rental-offer">
             <form onSubmit={(evt) => changeListingId(evt, listing.id)} className="Login-and-signup-form">
-              <Button type="submit" variant="contained" onClick={handleSeeOffersClicked}>
+              <Button type="submit" variant="contained">
                       See Offers
               </Button>     
             </form>
@@ -86,7 +104,7 @@ function Listings() {
               aria-labelledby="alert-dialog-title"
               aria-describedby="alert-dialog-description"
             > 
-              <div>{currListing}</div>
+              <div><Offer/></div>
             </Dialog> 
           </div>
     </div>

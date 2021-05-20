@@ -56,7 +56,7 @@ exports.deleteListing = async (req,res) => {
 
 exports.getUserListings = async (req,res) => {
     try {
-        rental.findAll({ where: { sellerId: req.body.userId } }).then(rental => res.json(rental));
+        rental.findAll({ where: { sellerId: req.query.userId } }).then(rental => res.json(rental));
     } catch(err) {
         return res.status(500).send(err.message);
     }
@@ -64,7 +64,7 @@ exports.getUserListings = async (req,res) => {
 
 exports.getOffersOnListing = async (req,res) => {
     try {
-        var listing = await rental.findOne({ where: { id: req.body.listingId } })
+        var listing = await rental.findOne({ where: { id: req.query.listingId } })
         var offers = await listing.getOffers();
         return res.status(200).send(offers); 
     } catch(err) {
@@ -74,14 +74,14 @@ exports.getOffersOnListing = async (req,res) => {
 
 exports.getAllButUserListings = async (req,res) => {
     try {
-        var allButUserRentals = await rental.findAll({ where: { sellerId: { [Op.ne]: req.body.userId } } });
+        var allButUserRentals = await rental.findAll({ where: { sellerId: { [Op.ne]: req.query.userId } } });
         var listings = [];
         for(var i = 0; i < allButUserRentals.length; i++) {
             var listing = allButUserRentals[i];
             var offers = await allButUserRentals[i].getOffers();
             var match = false;
             for(var j = 0; j < offers.length; j++) {
-                if(offers[j].buyerId == req.body.userId) {
+                if(offers[j].buyerId == req.query.userId) {
                     match = true;
                     break;
                 }
