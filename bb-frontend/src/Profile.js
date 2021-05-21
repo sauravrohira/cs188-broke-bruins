@@ -15,7 +15,7 @@ function Profile() {
     const auth = useAuth();
     const user = auth.user;
     
-    const [myListingsClicked, setMyListingsClicked] = useState(true);
+    // const [myListingsClicked, setMyListingsClicked] = useState(true);
     const [myOffersClicked, setMyOffersClicked] = useState(false);
     const [createListingClicked, setCreateListingClicked] = useState(false);
 
@@ -24,12 +24,12 @@ function Profile() {
     }
 
     const handleMyListingsClicked = () => {
-        setMyListingsClicked(true);
+        // setMyListingsClicked(true);
         setMyOffersClicked(false);
     }
 
     const handleMyOffersClicked = () => {
-        setMyListingsClicked(false); 
+        // setMyListingsClicked(false); 
         setMyOffersClicked(true);
     }
 

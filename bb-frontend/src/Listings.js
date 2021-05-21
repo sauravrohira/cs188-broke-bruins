@@ -31,7 +31,7 @@ function Listings() {
   const [listings, setListings] = useState(null);
   const [seeOffersClicked, setSeeOffersClicked] = useState(false);
   const [currListing, setCurrListing] = useState(null);
-  const [currOffers, setCurrOffers] = useState(null);
+  // const [currOffers, setCurrOffers] = useState(null);
 
   const handleCloseSeeOffers = () => {
     setSeeOffersClicked(false);
@@ -49,6 +49,7 @@ function Listings() {
   }
 
   const setFilteredListings = (result) => {
+    /* eslint eqeqeq: 0 */
     const filteredListings = result.filter(result => result.sellerId == userId)
     if(filteredListings.length) setListings(filteredListings);
   }
@@ -67,6 +68,7 @@ function Listings() {
         )
       }
       getListings();
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

@@ -69,6 +69,7 @@ function Login(props) {
       primaryDetails
     }
     let response = await auth.signup(userObj);
+    /* eslint eqeqeq: 0 */
     if (response != true) {
       setIncorrectSignup(true);
       setErrorMessage(response);
@@ -93,7 +94,6 @@ function Login(props) {
         <form onSubmit={evt => handleLogin(evt)} className="Login-and-signup-form">
             <div className="Login-field">
               <TextField 
-                id="Filled-basic"
                 label="Email Address" 
                 variant="outlined" 
                 onChange={(evt) => setEmail(evt.target.value)} 
@@ -124,7 +124,6 @@ function Login(props) {
         <form onSubmit={evt => handleSignup(evt)} className="Login-and-signup-form">
             <div className="Login-field">
               <TextField 
-                id="Filled-basic"
                 label="UCLA Email Address" 
                 variant="outlined" 
                 onChange={(evt) => setEmailNew(evt.target.value)} 
@@ -146,7 +145,6 @@ function Login(props) {
             </div>
             <div className="Login-field">
               <TextField 
-                id="Filled-basic"
                 label="Username" 
                 variant="outlined" 
                 onChange={(evt) => setUsername(evt.target.value)} 
@@ -156,7 +154,6 @@ function Login(props) {
             </div>
             <div className="Login-field">
               <TextField 
-                id="Filled-basic"
                 label="Primary Mode of Comm" 
                 variant="outlined" 
                 onChange={(evt) => setPrimaryComm(evt.target.value)} 
@@ -166,7 +163,6 @@ function Login(props) {
             </div>
             <div className="Login-field">
               <TextField 
-                id="Filled-basic"
                 label="Primary Details" 
                 variant="outlined" 
                 onChange={(evt) => setPrimaryDetails(evt.target.value)} 
@@ -184,7 +180,6 @@ function Login(props) {
             <div className="Login-and-signup-prompt">Please check your email for a verification code.</div>
             <div className="Login-field">
               <TextField 
-                id="Filled-basic"
                 label="Verification code" 
                 variant="outlined" 
                 onChange={(evt) => setVerificationCode(evt.target.value)} 

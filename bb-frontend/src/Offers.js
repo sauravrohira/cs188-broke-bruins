@@ -20,7 +20,6 @@ function Offers() {
     fetch(`http://localhost:8000/api/offer/getUsersOfferListings?userId=${userId}`, options)
         .then(res => res.json())
         .then((result) => {
-            console.log("here is the result:",result)
             setOffers(result);
         })
         .catch(err => {
@@ -28,6 +27,7 @@ function Offers() {
         })
       }
       getListings();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

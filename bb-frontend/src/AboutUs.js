@@ -1,9 +1,5 @@
 import './App.css';
-import { useState } from 'react'
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import AlertDialog from "./PopUp.js"
-import { useAuth } from "./use-auth.js"
 import logo from './bruins-logo.png'
 
 function Login(props) {
@@ -16,7 +12,7 @@ function Login(props) {
                 <img src={logo} style={{height:'260px'}} alt='broke bruins'/>
             </div>
             <div className="About-us">
-                <div classname="About-us-title">About Us.</div>
+                <div className="About-us-title">About Us.</div>
                 <div className="About-us-text">
                     Welcome! Broke Bruins is a community for broke college students at UCLA  
                     trying to make some quick money. It creates a safe space for students to interact with 

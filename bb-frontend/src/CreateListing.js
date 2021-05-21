@@ -27,7 +27,8 @@ function CreateListing(props) {
         rental.sellerId = userId; 
         rental.description = description;
         console.log(JSON.stringify(rental))
-
+        
+        /* eslint eqeqeq: 0 */
         if(price == null || title == '' || description == ''){
             return
         }

@@ -19,6 +19,7 @@ import React, {
         body: JSON.stringify({email, password})
       })
       .then(response => {
+      /* eslint eqeqeq: 0 */
         if (response.status == 200)
           return response.json();
         return response.json().then(response => {
@@ -124,6 +125,7 @@ import React, {
         body: JSON.stringify(obj)
       })
       .then(response => {
+        /* eslint eqeqeq: 0 */
         if (response.status == 200)
           return true;
         return response.json().then(response => {
@@ -179,7 +181,6 @@ import React, {
           return null;
         }
         
-        console.log("!!", response);
         setUser(response)
         return response;
       })
