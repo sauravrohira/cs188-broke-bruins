@@ -14,7 +14,7 @@ function CreateListing(props) {
     const [price, setPrice] = useState(null);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [listingCreated, setListingCreated] = useState(false);
+    const [imageUploadError, setImageUploadError] = useState(null);
 
     const createPost = () => {
         console.log('creating post!')
@@ -64,10 +64,17 @@ function CreateListing(props) {
         };
 
         // replace cloudname with your Cloudinary cloud_name
-        return fetch('http://localhost:8000/api/image/upload', options)
-            .then(res => res.json())
+        fetch('http://localhost:8000/api/image/upload', options)
             .then(res => {
-                setImageUrl(res.url)
+                console.log(res)
+                if (res.ok){
+                    setImageUploadError(null);
+                    res.json().then(body => setImageUrl(body.url))
+                }
+                else {
+                    setImageUrl(null)
+                    res.json().then(body => setImageUploadError(body.message))
+                }
             })
             .catch(err => console.log(err));
     }
@@ -115,6 +122,7 @@ function CreateListing(props) {
                         <button type="button" onClick={handleImageUpload}>Upload</button>
                     </form>
                     {imageUrl && (<img src={imageUrl} alt ="uh" className="displayed-image" height="150" styles={{padding:'15'}}/> )}
+                    {imageUploadError && (<div className="Create-listing-error-text"> {imageUploadError} </div>)}
                 </div>
                 <Button type="button" variant="contained" color="primary" onClick={createPost}>
                     Submit

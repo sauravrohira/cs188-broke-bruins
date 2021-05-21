@@ -263,6 +263,11 @@
   font-size: 14px;
 }
 
+.Create-listing-error-text {
+  color: red;
+  font-size: 14px;
+}
+
 .Create-listing {
   margin-left: 24px;
   padding: 8px;

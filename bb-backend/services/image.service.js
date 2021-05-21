@@ -15,11 +15,22 @@ const storage = new CloudinaryStorage({
   },
 });
 
-const uploader = multer({storage:storage, limits:{
+var upload = multer({
+    storage: storage,
+    limits:{
     fileSize: 1000 * 1000 * 20,
     fields: 100,
     files: 100,
     parts: 100
-}});
+    },
+    fileFilter: function(_req, file, cb){
+      if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+        cb(null, true);
+      } else {
+        cb(null, false);
+        return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
+      }
+    }
+}).single('image');
 
-module.exports = {uploader}
+module.exports = {upload}
