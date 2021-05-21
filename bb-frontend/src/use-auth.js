@@ -181,7 +181,6 @@ import React, {
           return null;
         }
         
-        console.log("!!", response);
         setUser(response)
         return response;
       })
