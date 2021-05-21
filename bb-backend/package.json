@@ -30,6 +30,7 @@
     "pg": "^8.6.0",
     "react": "^17.0.2",
     "sequelize": "^6.5.0",
-    "sequelize-auto": "^0.7.11"
+    "sequelize-auto": "^0.7.11",
+    "toobusy-js": "^0.5.1"
   }
 }

@@ -2,13 +2,24 @@ const express = require('express');
 const sequelize = require('./services/db');
 const cors = require('cors')
 const helmet = require('helmet')
+const toobusy = require('toobusy-js');
+const port = process.env.PORT || "8000";
 
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(helmet());
-const port = process.env.PORT || "8000";
+
+//Prevent DoS Attack
+app.use(function(req, res, next) {
+    if (toobusy()) {
+        // log if you see necessary
+        res.send(503, "Server Too Busy");
+    } else {
+    next();
+    }
+});
 
 async function assertDatabaseConnectionOk() {
     console.log('Checking database connection...');
