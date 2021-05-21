@@ -105,6 +105,7 @@ function RentalList() {
                 setListings(error);
             }
             )
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [])
 
     return (

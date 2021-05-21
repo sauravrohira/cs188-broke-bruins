@@ -21,20 +21,11 @@ export default function AuthenticationRouting(props) {
     setLoading(true);
 
     const refreshPage = async () => {
-      let response = await auth.refresh();
-      console.log(auth.user);
-      if (! response) {
-        console.log("refresh didn't work");
-      }
-      else {
-        console.log("refresh worked");
-        console.log(response);
-      }
-
       setLoading(false);
     };
 
     refreshPage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
