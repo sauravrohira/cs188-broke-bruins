@@ -1,12 +1,13 @@
 const OfferRouter = require('express').Router();
 const OfferController = require('../controllers/offer.controller');
+const authorize = require('../middlewares/auth');
 
-OfferRouter.post('/createOffer', OfferController.createOffer);
-OfferRouter.post('/updateOffer/', OfferController.updateOffer);
-OfferRouter.post('/deleteOffer/', OfferController.deleteOffer);
-OfferRouter.get('/getOffer', OfferController.getOffer);
-OfferRouter.get('/getAllOffers', OfferController.getAllOffers);
-OfferRouter.get('/getListingOffers', OfferController.getListingOffers);
-OfferRouter.get('/getUsersOfferListings', OfferController.getUsersOfferListings);
+OfferRouter.post('/createOffer', authorize, OfferController.createOffer);
+OfferRouter.post('/updateOffer/', authorize, OfferController.updateOffer);
+OfferRouter.post('/deleteOffer/', authorize, OfferController.deleteOffer);
+OfferRouter.get('/getOffer', authorize, OfferController.getOffer);
+OfferRouter.get('/getAllOffers', authorize, OfferController.getAllOffers);
+OfferRouter.get('/getListingOffers', authorize, OfferController.getListingOffers);
+OfferRouter.get('/getUsersOfferListings', authorize, OfferController.getUsersOfferListings);
 
 module.exports = OfferRouter; 

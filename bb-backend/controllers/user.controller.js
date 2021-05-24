@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const user = require('../models/user');
+const jwt = require('jsonwebtoken');
 const userServices = require('../services/user.services');
 var tokenGen = require('generate-sms-verification-code');
 const emailService = require('../services/emailService');
@@ -71,15 +71,17 @@ exports.login = async (req,res) => {
     }
 
     return res.status(200).json({
-        message: 'Login successful',
-        id: user.id,
-        username: user.username,
-        email: user.email,
-        primaryComm: user.primary_communication_method,
-        primaryDetails: user.primary_communication_details,
-        secondaryComm: user.secondary_communication_method,
-        secondaryDetails: user.secondary_communication_details,
-    })
+        token: jwt.sign({
+            message: 'Login successful',
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            primaryComm: user.primary_communication_method,
+            primaryDetails: user.primary_communication_details,
+            secondaryComm: user.secondary_communication_method,
+            secondaryDetails: user.secondary_communication_details
+        }, process.env.JWT_KEY, { expiresIn: '1h' })
+    });
 }
 
 exports.addPicture = async (req, res) => {
