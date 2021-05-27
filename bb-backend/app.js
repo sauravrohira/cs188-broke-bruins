@@ -4,6 +4,7 @@ const cors = require('cors')
 const helmet = require('helmet')
 const toobusy = require('toobusy-js');
 const port = process.env.PORT || "8000";
+require('dotenv').config();
 
 
 const app = express();
